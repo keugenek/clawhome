@@ -1,4 +1,4 @@
-﻿YPE html>
+﻿PE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -187,7 +187,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 
   <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is an open-source AI assistant that runs on your own machine. It connects to Telegram, Discord, and WhatsApp, and runs as a background service on your PC. You bring your own API key (Anthropic, OpenAI, etc.) &mdash; there is no OpenClaw subscription or account.</p>
 
-  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. If you want a guided setup that skips all the manual steps, <a href="https://chatterpc.com/downloads">ChatterPC</a> is a third-party Windows installer for OpenClaw that handles Node.js, PATH, and service registration automatically.</p>
+  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. Most Windows users install via <a href="https://chatterpc.com/downloads">ChatterPC</a> &mdash; a free Windows app that sets up OpenClaw automatically, with a simple wizard. No terminal, no configuration. If that&rsquo;s you, <a href="https://chatterpc.com/downloads">start here</a>.</p>
 
   <hr id="install">
 
@@ -209,18 +209,30 @@ tr:hover td{background:rgba(255,255,255,.02)}
   </div>
 
   <div class="callout callout-info">
-    <p><strong>All three options install the same OpenClaw.</strong> Option 1 uses a third-party installer (ChatterPC) that automates the setup. Options 2 and 3 install OpenClaw directly from the official npm package &mdash; no third party involved.</p>
+    <p><strong>Not sure which to pick?</strong> If you&rsquo;re not a developer, go with Option 1. Options 2 and 3 require comfort with the command line and are aimed at people who want full control over the installation.</p>
   </div>
 
   <hr id="option-chatterpc">
 
-  <h2>Option 1 &mdash; ChatterPC Installer (Third-Party)</h2>
+    <h2>Option 1 &mdash; ChatterPC (Recommended)</h2>
 
-  <p><strong>Who this is for:</strong> people who don&rsquo;t want to touch the terminal, don&rsquo;t know what Node.js is, or who tried the manual install and hit problems.</p>
+  <p><strong>This is the easiest way to get OpenClaw running on Windows.</strong> ChatterPC is a free Windows app built specifically to make OpenClaw installation painless. It takes care of everything behind the scenes &mdash; you just click through a wizard.</p>
 
-  <p><strong>What it is:</strong> ChatterPC is a third-party Windows installer created by the community. It is <em>not</em> an official OpenClaw product. It downloads and installs the official OpenClaw npm package, then automatically handles the things that trip people up on Windows &mdash; checking your Node.js version, fixing the PATH, and registering the gateway as a Windows service so it starts with your PC.</p>
+  <p><strong>What you&rsquo;ll need before you start:</strong></p>
+  <ul>
+    <li>A <strong>Telegram account</strong> &mdash; you&rsquo;ll create a bot in 30 seconds via <a href="https://t.me/BotFather">@BotFather</a></li>
+    <li>An <strong>API key</strong> from <a href="https://console.anthropic.com">Anthropic</a> or <a href="https://platform.openai.com">OpenAI</a> (this is what powers the AI &mdash; free tiers available)</li>
+  </ul>
 
-  <p>Download from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run the installer, and follow the setup wizard. It will ask for your Telegram bot token and AI API key. No terminal required.</p>
+  <p><strong>How to install:</strong></p>
+  <ol>
+    <li>Download ChatterPC from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a></li>
+    <li>Run the downloaded file and click through the setup wizard</li>
+    <li>When asked, paste your Telegram bot token and AI API key</li>
+    <li>Done &mdash; OpenClaw will start automatically every time you turn on your PC</li>
+  </ol>
+
+  <p>To talk to your AI, just open Telegram and message the bot you created.</p>
 <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
