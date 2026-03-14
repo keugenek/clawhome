@@ -1,9 +1,9 @@
-﻿TYPE html>
+﻿YPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpenClaw Windows Install Guide (Community)</title>
+<title>OpenClaw on Windows &mdash; Community Installation Guide</title>
 <meta name="description" content="How to install OpenClaw on Windows 10 and 11. One-click installer via ChatterPC, manual npm install, WSL2 guide, and fixes for 13+ common Windows issues.">
 <meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide">
 <meta property="og:title" content="Install OpenClaw on Windows &mdash; Complete Guide">
@@ -128,12 +128,12 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <body>
 
 <nav>
-  <a class="nav-logo" href="/clawhome/">OpenClaw for Windows</a>
+  <a class="nav-logo" href="/clawhome/">OpenClaw Windows Guide</a>
   <div class="nav-links">
     <a href="#install">Install</a>
     <a href="#issues">Troubleshooting</a>
     <a href="https://github.com/keugenek/clawhome">GitHub</a>
-    <a href="https://chatterpc.com/downloads" class="nav-dl">ChatterPC .msi</a>
+    <a href="https://chatterpc.com/downloads" class="nav-dl">Easy Installer</a>
   </div>
 </nav>
 
@@ -175,8 +175,8 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <!-- Main content -->
 <main class="content">
 
-  <h1>OpenClaw for Windows</h1>
-  <p class="subtitle">Community guide for Windows 10 &amp; 11 &mdash; one-click installer, manual npm setup, WSL2, and fixes for common issues.</p>
+  <h1>OpenClaw on Windows</h1>
+  <p class="subtitle">Community installation guide for Windows 10 &amp; 11. Three ways to install, plus fixes for the most common Windows issues.</p>
 
   <div class="badges">
     <a href="https://github.com/keugenek/clawhome/stargazers"><img src="https://img.shields.io/github/stars/keugenek/clawhome?style=social" alt="Stars"></a>
@@ -185,9 +185,9 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <img src="https://img.shields.io/badge/download-chatterpc.com-brightgreen" alt="Download">
   </div>
 
-  <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is a self-hosted personal AI assistant &mdash; no subscriptions, no cloud, your data stays local. It connects to Telegram, Discord, and WhatsApp and runs 24/7 as a background service on your PC.</p>
+  <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is an open-source AI assistant that runs on your own machine. It connects to Telegram, Discord, and WhatsApp, and runs as a background service on your PC. You bring your own API key (Anthropic, OpenAI, etc.) &mdash; there is no OpenClaw subscription or account.</p>
 
-  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. If you want a pre-packaged installer that skips all the manual steps, <a href="https://chatterpc.com/downloads">ChatterPC</a> is a third-party MSI wrapper for OpenClaw that handles Node.js, PATH, and service setup automatically.</p>
+  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. If you want a guided setup that skips all the manual steps, <a href="https://chatterpc.com/downloads">ChatterPC</a> is a third-party Windows installer for OpenClaw that handles Node.js, PATH, and service registration automatically.</p>
 
   <hr id="install">
 
@@ -214,10 +214,13 @@ tr:hover td{background:rgba(255,255,255,.02)}
 
   <hr id="option-chatterpc">
 
-  <h2>Option 1 &mdash; ChatterPC (Third-Party Installer)</h2>
+  <h2>Option 1 &mdash; ChatterPC Installer (Third-Party)</h2>
 
-  <p><strong>What it is:</strong> ChatterPC is a third-party Windows installer that bundles OpenClaw with an automated setup wizard. It is not the official OpenClaw installer &mdash; it is a community tool that simplifies the manual steps below.</p>
-  <p>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run it, and follow the wizard. It installs the official OpenClaw npm package, configures Node.js, PATH, and registers a Windows service. No terminal needed.</p>
+  <p><strong>Who this is for:</strong> people who don&rsquo;t want to touch the terminal, don&rsquo;t know what Node.js is, or who tried the manual install and hit problems.</p>
+
+  <p><strong>What it is:</strong> ChatterPC is a third-party Windows installer created by the community. It is <em>not</em> an official OpenClaw product. It downloads and installs the official OpenClaw npm package, then automatically handles the things that trip people up on Windows &mdash; checking your Node.js version, fixing the PATH, and registering the gateway as a Windows service so it starts with your PC.</p>
+
+  <p>Download from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run the installer, and follow the setup wizard. It will ask for your Telegram bot token and AI API key. No terminal required.</p>
 <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
