@@ -1,19 +1,23 @@
-# ClawHome - Your AI Brain. At Home.
+# ClawHome - Install OpenClaw on Windows (Complete Guide)
 
-> Personal AI assistant that runs on your Windows PC. Connects to Telegram, Discord & WhatsApp. No subscriptions. No cloud. Yours forever.
+**The easiest way to run [OpenClaw](https://github.com/openclaw/openclaw) on Windows 10 / 11.** Pre-configured installer + step-by-step manual guide + WSL2 setup + common Windows fixes.
 
 [![GitHub stars](https://img.shields.io/github/stars/keugenek/clawhome?style=social)](https://github.com/keugenek/clawhome/stargazers)
 [![OpenClaw](https://img.shields.io/badge/powered%20by-OpenClaw-orange)](https://github.com/openclaw/openclaw)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Download](https://img.shields.io/badge/download-chatterpc.com-brightgreen)](https://chatterpc.com/downloads)
 
-A pre-configured [OpenClaw](https://github.com/openclaw/openclaw) setup for Windows. Install it, link your Telegram bot, and your AI is live in under 3 minutes.
+OpenClaw is a self-hosted personal AI assistant that runs on your own machine — no subscriptions, no cloud, your data stays local. **This repo is a Windows-focused installation guide and pre-packaged installer**, because OpenClaw's official docs are Linux-first and Windows users hit a lot of friction.
 
-- **Ask questions**, set reminders, search files
-- **Runs 24/7** in the background as a Windows service
-- **Connects to any AI model** - Claude, GPT-4o, local Llama
-- **100+ integrations** via skills (GitHub, Notion, weather, Home Assistant...)
-- **Your data stays on your machine** - no cloud middleman
+What you get after installing OpenClaw on Windows:
+
+- **AI in Telegram, Discord & WhatsApp** - chat with your AI in apps you already use
+- **Runs 24/7 as a Windows service** - starts automatically with your PC
+- **Connects to any model** - Claude, GPT-4o, local Llama, Mistral
+- **100+ skills / integrations** - GitHub, Notion, weather, Home Assistant, eBay...
+- **100% local** - your conversations never leave your machine
+
+> **Searching for:** OpenClaw Windows install | OpenClaw Windows 10 | OpenClaw Windows 11 | how to install OpenClaw on Windows | OpenClaw WSL2 | OpenClaw not working Windows | openclaw gateway Windows
 
 ---
 
