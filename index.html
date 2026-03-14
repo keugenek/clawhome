@@ -1,4 +1,4 @@
-﻿html>
+﻿ml>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -215,6 +215,34 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
+
+  <p>This installs OpenClaw directly on Windows &mdash; no virtual machine, no Linux layer in between. When done right, it&rsquo;s the most capable setup: your AI runs as a real Windows process with full access to your machine.</p>
+
+  <h3>Why native Windows beats WSL2 (when it works)</h3>
+
+  <p>WSL2 runs OpenClaw inside a Linux VM. It&rsquo;s reliable, but sandboxed &mdash; your AI lives in a box and can&rsquo;t touch Windows. Native Windows means your AI is actually <em>on</em> your machine. Things that work natively but not in WSL2:</p>
+
+  <ul>
+    <li><strong>Control Windows apps</strong> &mdash; open Excel, your browser, any app; click buttons, fill forms, automate UI</li>
+    <li><strong>Full file access at full speed</strong> &mdash; read and write <code>C:\Users\You\Documents</code> instantly, no path translation</li>
+    <li><strong>Run PowerShell</strong> &mdash; automate Windows settings, registry, services, scheduled tasks</li>
+    <li><strong>Clipboard</strong> &mdash; your AI can read what you copied and paste into any app</li>
+    <li><strong>Screen and UI automation</strong> &mdash; take screenshots, see your desktop, click things</li>
+    <li><strong>Local network without port forwarding</strong> &mdash; reach your NAS, printer, Home Assistant, local devices directly</li>
+  </ul>
+
+  <h3>The catch</h3>
+
+  <p>The manual install has some Windows-specific rough edges:</p>
+  <ul>
+    <li><strong>Node.js version</strong> &mdash; must be 22+. Node 18 or 20 will silently fail with confusing errors</li>
+    <li><strong>PATH doesn&rsquo;t update automatically</strong> &mdash; after installing, you often need to restart the terminal before commands work</li>
+    <li><strong>Gateway closes with the terminal</strong> &mdash; you need to install it as a Windows service or your AI stops when you close the window</li>
+    <li><strong>PowerShell execution policy</strong> &mdash; Windows blocks scripts by default; one-time fix required</li>
+    <li><strong>Usernames with spaces or special characters</strong> &mdash; e.g. &ldquo;John Smith&rdquo; can break the gateway</li>
+  </ul>
+
+  <p>All of these are fixed in the steps below. If you&rsquo;d rather skip this entirely, <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> handles it automatically.</p>
 
   <h3 id="prereqs">Prerequisites</h3>
 
