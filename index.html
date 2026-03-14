@@ -3,27 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClawHome &#8212; Your AI Brain. At Home.</title>
-<meta name="description" content="Your personal AI assistant that lives on your computer. Connects to Telegram, Discord, WhatsApp. No subscriptions. Yours forever.">
-<meta property="og:title" content="ClawHome &#8212; Your AI Brain. At Home.">
-<meta property="og:description" content="Your personal AI assistant that lives on your computer. No subscriptions. Yours forever.">
+<title>ClawHome &mdash; Your AI Brain. At Home.</title>
+<meta name="description" content="Buy a node &mdash; get a free AI assistant forever. No subscriptions. Gets smarter with every node sold.">
+<meta property="og:title" content="ClawHome &mdash; Your AI Brain. At Home.">
+<meta property="og:description" content="Buy a node &mdash; get a free AI assistant forever. No subscriptions. Gets smarter with every node sold.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clawhome.ai">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F9E0;</text></svg>">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0d1117;
-  --bg2:#161b22;
-  --bg3:#21262d;
-  --fg:#e6edf3;
-  --fg2:#8b949e;
-  --accent:#f97316;
-  --accent2:#fb923c;
-  --green:#22c55e;
-  --red:#ef4444;
-  --radius:12px
-}
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--fg:#e6edf3;--fg2:#8b949e;--accent:#f97316;--accent2:#fb923c;--radius:12px}
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
 a{color:var(--accent);text-decoration:none}
@@ -32,14 +21,15 @@ a:hover{color:var(--accent2)}
 /* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(249,115,22,.2)}50%{box-shadow:0 0 40px rgba(249,115,22,.4)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* Nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
-nav .logo{font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:.5rem;color:var(--fg)}
-nav .logo .claw{color:var(--accent)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+nav .logo span{color:var(--accent)}
 nav .links{display:flex;gap:1.5rem;align-items:center}
 nav .links a{color:var(--fg2);font-size:.875rem;transition:color .2s}
 nav .links a:hover{color:var(--fg)}
@@ -48,18 +38,18 @@ nav .links a:hover{color:var(--fg)}
 
 /* Hero */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(249,115,22,.07) 0%,transparent 50%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(249,115,22,.08) 0%,transparent 50%);animation:float 8s ease-in-out infinite}
 .hero-badge{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);color:var(--accent);padding:.4rem 1.2rem;border-radius:100px;font-size:.85rem;font-weight:500;margin-bottom:2rem;animation:fadeUp .8s ease both}
 .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;animation:fadeUp .8s ease .1s both;letter-spacing:-.02em}
 .hero h1 .accent{color:var(--accent)}
-.hero p.sub{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--fg2);max-width:650px;margin-bottom:2.5rem;animation:fadeUp .8s ease .2s both}
+.hero p{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--fg2);max-width:650px;margin-bottom:2.5rem;animation:fadeUp .8s ease .2s both}
 .hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s ease .3s both}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;border-radius:var(--radius);font-size:1.05rem;font-weight:600;transition:all .25s ease;cursor:pointer;border:none;text-decoration:none}
 .btn-primary{background:var(--accent);color:#fff;animation:glow 3s ease-in-out infinite}
 .btn-primary:hover{background:var(--accent2);transform:translateY(-2px);color:#fff}
 .btn-secondary{background:transparent;color:var(--fg);border:1px solid var(--bg3)}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.hero-note{margin-top:1.5rem;color:var(--fg2);font-size:.85rem;animation:fadeUp .8s ease .4s both}
+.hero-sub{margin-top:2rem;color:var(--fg2);font-size:.85rem;animation:fadeUp .8s ease .4s both}
 
 /* Sections */
 section{padding:6rem 2rem}
@@ -68,50 +58,50 @@ section{padding:6rem 2rem}
 .section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;letter-spacing:-.01em}
 .section-sub{color:var(--fg2);font-size:1.1rem;max-width:600px;margin-bottom:3rem}
 
-/* Steps */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.step{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:2rem;transition:all .3s ease;position:relative}
-.step:hover{border-color:rgba(249,115,22,.3);transform:translateY(-4px)}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;background:rgba(249,115,22,.15);border-radius:8px;color:var(--accent);font-weight:800;font-size:1.1rem;margin-bottom:1rem}
-.step h3{font-size:1.25rem;margin-bottom:.75rem;font-weight:600}
-.step p{color:var(--fg2);font-size:.95rem;line-height:1.7}
+/* How it works */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:2rem;transition:all .3s ease}
+.card:hover{border-color:rgba(249,115,22,.3);transform:translateY(-4px)}
+.card-icon{font-size:2.5rem;margin-bottom:1rem;display:block}
+.card h3{font-size:1.25rem;margin-bottom:.75rem;font-weight:600}
+.card p{color:var(--fg2);font-size:.95rem;line-height:1.7}
 
 /* Comparison */
 .comparison{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-.comp-row{display:grid;grid-template-columns:1.8fr repeat(3,1fr);padding:1rem 1.5rem;align-items:center;font-size:.95rem}
+.comp-row{display:grid;grid-template-columns:1.5fr repeat(3,1fr);padding:1rem 1.5rem;align-items:center;font-size:.95rem}
 .comp-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,.04)}
-.comp-header{background:var(--bg3);font-weight:600;font-size:.8rem;color:var(--fg2);text-transform:uppercase;letter-spacing:.05em}
-.comp-row.highlight-col .col-clawhome{color:var(--accent);font-weight:700}
-.col-clawhome{text-align:center;color:var(--accent);font-weight:600}
-.col-other{text-align:center;color:var(--fg2)}
+.comp-header{background:var(--bg3);font-weight:600;font-size:.85rem;color:var(--fg2);text-transform:uppercase;letter-spacing:.05em}
+.comp-highlight{background:rgba(249,115,22,.06)}
+.comp-highlight .comp-val{color:var(--accent);font-weight:700}
+.comp-val{text-align:center}
 .comp-label{font-weight:500}
-.yes{color:var(--green)}
-.no{color:var(--red)}
-.comp-note{padding:1.5rem 2rem;color:var(--fg2);font-size:.95rem;text-align:center}
+.comp-note{text-align:center;padding:2rem;color:var(--fg2);font-size:1rem}
 .comp-note strong{color:var(--accent)}
 
-/* Features grid */
+/* Network */
+.network-visual{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:3rem 0}
+.net-stage{text-align:center;padding:2rem;background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);min-width:200px;flex:1;max-width:280px;transition:all .3s ease}
+.net-stage:hover{border-color:rgba(249,115,22,.3);transform:translateY(-4px)}
+.net-nodes{font-size:2.5rem;font-weight:800;color:var(--accent);display:block}
+.net-label{color:var(--fg2);font-size:.85rem;margin:.5rem 0}
+.net-model{font-size:1.1rem;font-weight:600}
+.net-arrow{display:flex;align-items:center;color:var(--fg2);font-size:1.5rem}
+
+/* Features */
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
 .feature{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);transition:all .3s ease}
 .feature:hover{border-color:rgba(249,115,22,.2)}
-.feature-icon{font-size:1.4rem;flex-shrink:0;width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:rgba(249,115,22,.1);border-radius:8px}
+.feature-icon{font-size:1.5rem;flex-shrink:0;width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:rgba(249,115,22,.1);border-radius:8px}
 .feature h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
 .feature p{color:var(--fg2);font-size:.85rem}
 
-/* CTA box */
-.cta-section{text-align:center}
-.cta-box{background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(249,115,22,.03));border:1px solid rgba(249,115,22,.25);border-radius:var(--radius);padding:4rem 2rem;max-width:620px;margin:0 auto}
-.cta-box h3{font-size:2rem;font-weight:700;margin-bottom:.75rem}
-.cta-box p{color:var(--fg2);margin-bottom:2rem;font-size:1.1rem}
-.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.cta-note{margin-top:1.25rem;font-size:.82rem;color:var(--fg2)}
-
-/* Testimonials */
-.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.testimonial{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.75rem}
-.testimonial blockquote{color:var(--fg);font-size:.95rem;line-height:1.7;margin-bottom:1rem}
-.testimonial cite{color:var(--fg2);font-size:.82rem;font-style:normal}
-.stars{color:var(--accent);font-size:.85rem;margin-bottom:.75rem}
+/* Waitlist */
+.waitlist-section{text-align:center}
+.waitlist-box{background:var(--bg2);border:1px solid rgba(249,115,22,.2);border-radius:var(--radius);padding:3rem 2rem;max-width:550px;margin:0 auto}
+.waitlist-box h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.waitlist-box p{color:var(--fg2);margin-bottom:2rem}
+.cta-buttons{display:flex;gap:.75rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.waitlist-note{margin-top:1rem;font-size:.8rem;color:var(--fg2)}
 
 /* Footer */
 footer{border-top:1px solid rgba(255,255,255,.06);padding:3rem 2rem;text-align:center;color:var(--fg2);font-size:.85rem}
@@ -123,205 +113,200 @@ footer p{margin:.25rem 0}
 /* Mobile */
 @media(max-width:768px){
   nav .links a:not(.nav-cta){display:none}
-  .comp-row{grid-template-columns:1.2fr repeat(3,1fr);font-size:.78rem;padding:.75rem .75rem}
+  .comp-row{grid-template-columns:1.2fr repeat(3,1fr);font-size:.8rem;padding:.8rem 1rem}
+  .net-arrow{display:none}
   section{padding:4rem 1.5rem}
 }
 @media(max-width:480px){
   .hero{padding:6rem 1.25rem 3rem}
-  .hero-buttons,.cta-buttons{flex-direction:column;width:100%}
+  .hero-buttons{flex-direction:column;width:100%}
   .btn{justify-content:center;width:100%}
-  .comp-row{font-size:.68rem;padding:.6rem .5rem}
-  .comp-row .comp-label{font-size:.68rem}
+  .cta-buttons{flex-direction:column;width:100%}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">&#x1F9E0; <span>Claw<span class="claw">Home</span></span></div>
+  <div class="logo">&#x1F9E0; <span>ClawHome</span></div>
   <div class="links">
     <a href="#how">How It Works</a>
-    <a href="#compare">Why ClawHome</a>
+    <a href="#compare">Pricing</a>
     <a href="#features">Features</a>
     <a href="#download" class="nav-cta">Download Free</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <span class="hero-badge">&#x2728; Your personal AI, running at home</span>
-  <h1>Your AI Brain.<br><span class="accent">At Home.</span></h1>
-  <p class="sub">ClawHome runs on your PC and connects to Telegram, Discord &amp; WhatsApp. No subscriptions. No cloud. Yours forever.</p>
+  <span class="hero-badge">&#x2728; AI that lives on your machine</span>
+  <h1>&#x1F9E0; ClawHome &mdash; Your AI Brain.<br><span class="accent">At Home.</span></h1>
+  <p>Install once &mdash; get a personal AI assistant forever. No subscriptions. Connects to Telegram, Discord &amp; WhatsApp. Gets smarter with every update.</p>
   <div class="hero-buttons">
     <a href="#download" class="btn btn-primary">&#x2B07; Download Free</a>
     <a href="#compare" class="btn btn-secondary">See how it compares</a>
   </div>
-  <p class="hero-note">Free forever &middot; Windows &middot; No account needed</p>
+  <p class="hero-sub">Free forever &middot; Windows &middot; Open source (MIT)</p>
 </section>
 
-<!-- HOW IT WORKS -->
 <section id="how">
   <div class="container reveal">
     <div class="section-label">How It Works</div>
-    <div class="section-title">Up and running in 3 minutes.</div>
-    <div class="section-sub">No servers to manage. No cloud to trust.</div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Install</h3>
-        <p>Download and run the installer. ClawHome sets itself up in the background. No tech knowledge needed.</p>
+    <div class="section-title">Simple. Private. Powerful.</div>
+    <div class="section-sub">Install and connect in under 3 minutes.</div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">&#x1F512;</span>
+        <h3>Private</h3>
+        <p>Your data never leaves your home. Local AI, local storage, local control. No cloud middleman.</p>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Connect</h3>
-        <p>Link your Telegram, Discord or WhatsApp in one click. Your AI appears right inside the apps you already use.</p>
+      <div class="card">
+        <span class="card-icon">&#x1F9E0;</span>
+        <h3>Smart</h3>
+        <p>Powered by the latest models. Remembers context, runs skills, and gets better with every update &mdash; automatically.</p>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Done</h3>
-        <p>Ask anything. Schedule reminders. Search files. Control your smart home. Your AI is live &mdash; 24/7.</p>
+      <div class="card">
+        <span class="card-icon">&#x1F310;</span>
+        <h3>Connected</h3>
+        <p>Telegram, WhatsApp, Discord. Your AI, everywhere you chat. One brain, every platform.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
 <section id="compare" style="background:var(--bg2)">
   <div class="container reveal">
-    <div class="section-label">Why ClawHome</div>
-    <div class="section-title">Stop renting your AI.</div>
-    <div class="section-sub">One download. Yours forever. No monthly bill.</div>
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Stop renting your AI</div>
+    <div class="section-sub">One download. Yours forever.</div>
     <div class="comparison">
       <div class="comp-row comp-header">
         <div></div>
-        <div class="col-clawhome">ClawHome</div>
-        <div class="col-other">ChatGPT Plus</div>
-        <div class="col-other">Claude Pro</div>
+        <div class="comp-val">&#x1F9E0; ClawHome</div>
+        <div class="comp-val">ChatGPT Plus</div>
+        <div class="comp-val">Claude Pro</div>
       </div>
-      <div class="comp-row highlight-col">
+      <div class="comp-row comp-highlight">
         <div class="comp-label">Price</div>
-        <div class="col-clawhome">Free</div>
-        <div class="col-other">$20 / mo</div>
-        <div class="col-other">$20 / mo</div>
+        <div class="comp-val">Free</div>
+        <div class="comp-val">$20/mo</div>
+        <div class="comp-val">$20/mo</div>
       </div>
       <div class="comp-row">
-        <div class="comp-label">After 1 year</div>
-        <div class="col-clawhome">$0</div>
-        <div class="col-other">$240</div>
-        <div class="col-other">$240</div>
+        <div class="comp-label">Year 1 cost</div>
+        <div class="comp-val" style="color:var(--accent);font-weight:600">$0</div>
+        <div class="comp-val">$240</div>
+        <div class="comp-val">$240</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Year 2 cost</div>
+        <div class="comp-val" style="color:var(--accent);font-weight:600">$0</div>
+        <div class="comp-val">$240</div>
+        <div class="comp-val">$240</div>
       </div>
       <div class="comp-row">
         <div class="comp-label">Your data</div>
-        <div class="col-clawhome"><span class="yes">&#x2714; Stays on your PC</span></div>
-        <div class="col-other"><span class="no">&#x2716; Their servers</span></div>
-        <div class="col-other"><span class="no">&#x2716; Their servers</span></div>
+        <div class="comp-val">&#x1F3E0; Stays home</div>
+        <div class="comp-val">&#x26A0; Their servers</div>
+        <div class="comp-val">&#x26A0; Their servers</div>
       </div>
       <div class="comp-row">
         <div class="comp-label">Telegram / Discord</div>
-        <div class="col-clawhome"><span class="yes">&#x2714; Built-in</span></div>
-        <div class="col-other"><span class="no">&#x2716; No</span></div>
-        <div class="col-other"><span class="no">&#x2716; No</span></div>
+        <div class="comp-val">&#x2705; Built-in</div>
+        <div class="comp-val">&#x274C; No</div>
+        <div class="comp-val">&#x274C; No</div>
       </div>
       <div class="comp-row">
-        <div class="comp-label">Works offline</div>
-        <div class="col-clawhome"><span class="yes">&#x2714; Yes</span></div>
-        <div class="col-other"><span class="no">&#x2716; No</span></div>
-        <div class="col-other"><span class="no">&#x2716; No</span></div>
+        <div class="comp-label">Ownership</div>
+        <div class="comp-val">&#x2705; Yours</div>
+        <div class="comp-val">&#x274C; Rented</div>
+        <div class="comp-val">&#x274C; Rented</div>
       </div>
-      <div class="comp-row">
-        <div class="comp-label">Custom skills / plugins</div>
-        <div class="col-clawhome"><span class="yes">&#x2714; Open source</span></div>
-        <div class="col-other"><span class="no">&#x2716; Limited</span></div>
-        <div class="col-other"><span class="no">&#x2716; No</span></div>
+    </div>
+    <div class="comp-note">After <strong>day 1</strong>, ClawHome is already cheaper. And it&rsquo;s <strong>YOURS</strong>.</div>
+  </div>
+</section>
+
+<section id="network">
+  <div class="container reveal">
+    <div class="section-label" style="text-align:center">AI Models</div>
+    <div class="section-title" style="text-align:center">Connect any model. Use the best.</div>
+    <div class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto">ClawHome connects to cloud models or runs local AI on your GPU. Your choice.</div>
+    <div class="network-visual">
+      <div class="net-stage">
+        <span class="net-nodes">&#x2601;</span>
+        <div class="net-label">cloud mode</div>
+        <div class="net-model">GPT-4o / Claude</div>
       </div>
-      <div class="comp-note">
-        After <strong>1 month</strong>, ClawHome is already cheaper. And it&rsquo;s <strong>100% yours.</strong>
+      <div class="net-arrow">&#x2192;</div>
+      <div class="net-stage">
+        <span class="net-nodes">&#x1F4BB;</span>
+        <div class="net-label">local mode</div>
+        <div class="net-model">Llama / Mistral</div>
+      </div>
+      <div class="net-arrow">&#x2192;</div>
+      <div class="net-stage">
+        <span class="net-nodes">&#x1F9E0;</span>
+        <div class="net-label">your choice</div>
+        <div class="net-model">Mix &amp; Match</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
+<section id="features" style="background:var(--bg2)">
   <div class="container reveal">
     <div class="section-label">Features</div>
     <div class="section-title">Everything you need. Nothing you don&rsquo;t.</div>
     <div class="section-sub">All built-in. No extras to buy.</div>
     <div class="features-grid">
       <div class="feature">
-        <div class="feature-icon">&#x1F4AC;</div>
-        <div><h4>Multi-Channel</h4><p>Telegram, Discord, WhatsApp. One AI brain, everywhere you already chat.</p></div>
+        <div class="feature-icon">&#x1F3A4;</div>
+        <div><h4>Voice Control</h4><p>Whisper-powered speech recognition. Send voice messages, get smart replies.</p></div>
       </div>
       <div class="feature">
-        <div class="feature-icon">&#x1F512;</div>
-        <div><h4>100% Private</h4><p>Everything runs locally. Your conversations never leave your machine.</p></div>
+        <div class="feature-icon">&#x1F4F7;</div>
+        <div><h4>Vision</h4><p>Send a photo &mdash; your AI understands it. Great for receipts, screenshots, docs.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#x1F3E0;</div>
+        <div><h4>Smart Home</h4><p>Home Assistant integration. Control your home with natural language.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">&#x23F0;</div>
-        <div><h4>Smart Reminders</h4><p>Set reminders in plain language. &ldquo;Remind me to call Mum at 6pm.&rdquo; Done.</p></div>
+        <div><h4>Reminders &amp; Cron</h4><p>Set reminders, schedule tasks, get morning briefings. Proactive, not reactive.</p></div>
       </div>
       <div class="feature">
-        <div class="feature-icon">&#x1F50D;</div>
-        <div><h4>File Search</h4><p>Find any file on your PC with a natural language query. Instant.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F3A4;</div>
-        <div><h4>Voice Support</h4><p>Send voice messages &mdash; ClawHome transcribes and responds intelligently.</p></div>
+        <div class="feature-icon">&#x1F4AC;</div>
+        <div><h4>Multi-Channel</h4><p>Telegram, WhatsApp, Discord. One AI, everywhere you chat.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">&#x1F9E9;</div>
-        <div><h4>Extensible Skills</h4><p>Install community skills or write your own. GitHub, Notion, Home Assistant &mdash; you name it.</p></div>
+        <div><h4>Skills &amp; Plugins</h4><p>100+ integrations: GitHub, Notion, Google, weather, eBay and more.</p></div>
       </div>
       <div class="feature">
-        <div class="feature-icon">&#x1F4CA;</div>
-        <div><h4>Daily Briefings</h4><p>Morning summaries, metric tracking, proactive check-ins. Your AI that actually shows up.</p></div>
+        <div class="feature-icon">&#x1F6E1;</div>
+        <div><h4>Privacy-First</h4><p>Everything runs locally. Your data never leaves your network.</p></div>
       </div>
       <div class="feature">
-        <div class="feature-icon">&#x1F4E6;</div>
-        <div><h4>Open Source</h4><p>MIT licensed. See the code, fork it, trust it. No black boxes.</p></div>
+        <div class="feature-icon">&#x1F4D6;</div>
+        <div><h4>Open Source</h4><p>MIT licensed. Inspect, modify, contribute. It&rsquo;s yours.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section style="background:var(--bg2)">
-  <div class="container reveal">
-    <div class="section-label">Early Users</div>
-    <div class="section-title">People are loving it.</div>
-    <div class="testimonials">
-      <div class="testimonial">
-        <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-        <blockquote>&ldquo;I cancelled my ChatGPT subscription the week I installed this. It just lives in Telegram and does everything I need.&rdquo;</blockquote>
-        <cite>&#x2014; Developer, London</cite>
-      </div>
-      <div class="testimonial">
-        <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-        <blockquote>&ldquo;The privacy angle sold me. My work conversations stay on my laptop. Finally an AI I actually trust.&rdquo;</blockquote>
-        <cite>&#x2014; Freelancer, Berlin</cite>
-      </div>
-      <div class="testimonial">
-        <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-        <blockquote>&ldquo;Set it up in 5 minutes. Now it reminds me of meetings, searches my files, and briefs me every morning. Insane value for free.&rdquo;</blockquote>
-        <cite>&#x2014; Startup founder, Amsterdam</cite>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DOWNLOAD CTA -->
-<section id="download" class="cta-section">
+<section id="download" class="waitlist-section">
   <div class="container reveal">
     <div class="section-label">Download</div>
-    <div class="section-title">Get started today. It&rsquo;s free.</div>
-    <div class="cta-box">
+    <div class="section-title">Get yours today. It&rsquo;s free.</div>
+    <div class="waitlist-box">
       <h3>&#x1F9E0; ClawHome</h3>
-      <p>Your AI brain, at home. Download, install, connect your Telegram &mdash; done.</p>
+      <p>Your AI brain, running at home. Install, connect Telegram &mdash; done in 3 minutes.</p>
       <div class="cta-buttons">
         <a href="https://chatterpc.com/downloads" class="btn btn-primary">&#x2B07; Download for Windows</a>
         <a href="https://github.com/keugenek/clawhome" class="btn btn-secondary">&#x2605; Star on GitHub</a>
       </div>
-      <p class="cta-note">Free forever &middot; Open source (MIT) &middot; No account required</p>
+      <div class="waitlist-note">Free forever &middot; Open source (MIT) &middot; No account required</div>
     </div>
   </div>
 </section>
@@ -334,17 +319,12 @@ footer p{margin:.25rem 0}
     <a href="mailto:hello@clawhome.ai">Contact</a>
   </div>
   <p>Built by <strong>VoxelMosaic</strong> &mdash; London, UK</p>
-  <p style="margin-top:.5rem;font-size:.8rem">Powered by <a href="https://github.com/keugenek/clawhome">OpenClaw</a> (MIT)</p>
+  <p>Powered by <a href="https://github.com/keugenek/clawhome">OpenClaw</a> (MIT)</p>
 </footer>
 
 <script>
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      obs.unobserve(e.target);
-    }
-  });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
