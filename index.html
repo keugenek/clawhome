@@ -1,4 +1,4 @@
-﻿html lang="en">
+﻿tml lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,6 +205,16 @@ tr:hover td{background:rgba(255,255,255,.02)}
       <p>Install directly via npm and PowerShell. Full control, no third-party tools involved.</p>
       <a href="#option-manual" class="btn btn-outline">See manual guide &darr;</a>
     </div>
+  </div>
+
+    <div style="background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;text-align:center">
+    <h3 style="margin-bottom:.5rem">Get notified when new versions drop</h3>
+    <p style="color:var(--fg2);font-size:.9rem;margin-bottom:1.25rem">We'll email you when there's a new release or a major Windows fix. No spam, unsubscribe anytime.</p>
+    <form id="subscribe-form" style="display:flex;gap:.5rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+      <input type="email" id="sub-email" placeholder="you@email.com" required style="flex:1;min-width:200px;padding:.6rem 1rem;border-radius:8px;border:1px solid var(--bg3);background:var(--bg);color:var(--fg);font-size:.9rem;outline:none">
+      <button type="submit" style="padding:.6rem 1.5rem;border-radius:8px;background:var(--accent);color:#fff;font-weight:600;font-size:.9rem;border:none;cursor:pointer;white-space:nowrap">Subscribe</button>
+    </form>
+    <p id="sub-msg" style="margin-top:.75rem;font-size:.82rem;color:var(--fg2);display:none"></p>
   </div>
 
   <div class="callout callout-info">
@@ -629,6 +639,39 @@ headings.forEach(h => observer.observe(h));
 
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"5b760df817ff4d47a5ae6939805b4807"}'></script>
+
+<script>
+document.getElementById("subscribe-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("sub-email").value.trim();
+  const msg = document.getElementById("sub-msg");
+  const btn = e.target.querySelector("button");
+  if (!email) return;
+  btn.disabled = true;
+  btn.textContent = "...";
+  try {
+    const r = await fetch("https://chatterpc.com/downloads/subscribe", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({email})
+    });
+    if (r.ok) {
+      msg.style.display = "block";
+      msg.style.color = "#22c55e";
+      msg.textContent = "You're in! We'll let you know when something ships.";
+      btn.textContent = "Subscribed";
+    } else {
+      throw new Error(r.statusText);
+    }
+  } catch (err) {
+    msg.style.display = "block";
+    msg.style.color = "#ef4444";
+    msg.textContent = "Something went wrong. Try again?";
+    btn.disabled = false;
+    btn.textContent = "Subscribe";
+  }
+});
+</script>
 </body>
 </html>
 
