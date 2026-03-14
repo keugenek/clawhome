@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -128,12 +128,12 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <body>
 
 <nav>
-  <a class="nav-logo" href="/">&#x1F9E0; Claw<span class="claw">Home</span></a>
+  <a class="nav-logo" href="/">OpenClaw <span class="claw">Windows</span></a>
   <div class="nav-links">
-    
-    
+    <a href="#install">Install</a>
+    <a href="#issues">Troubleshooting</a>
     <a href="https://github.com/keugenek/clawhome">GitHub</a>
-    <a href="https://chatterpc.com/downloads" class="nav-dl">&#x2B07; Download</a>
+    <a href="https://chatterpc.com/downloads" class="nav-dl">&#x2B07; Download Free</a>
   </div>
 </nav>
 
@@ -147,7 +147,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <a href="#option-manual">Option 2 &mdash; Manual (Windows)</a>
   <a href="#option-wsl2">Option 3 &mdash; WSL2</a>
 
-  <h4>Manual Guide</h4>
+  <h4>Option 2 &mdash; Manual Guide</h4>
   <a href="#prereqs">Prerequisites</a>
   <a href="#step1">Step 1 &mdash; Install</a>
   <a href="#step2">Step 2 &mdash; Onboarding</a>
@@ -155,7 +155,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <a href="#step4">Step 4 &mdash; Telegram</a>
   <a href="#step5">Step 5 &mdash; Verify</a>
 
-  <h4>WSL2 Guide</h4>
+  <h4>Option 3 &mdash; WSL2 Guide</h4>
   <a href="#wsl-prereqs">WSL2 Prerequisites</a>
   <a href="#wsl-step1">Step 1 &mdash; Install WSL2</a>
   <a href="#wsl-step2">Step 2 &mdash; Enable systemd</a>
@@ -227,36 +227,6 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <div class="callout callout-tip">
     <p><strong>Works on Windows 10 and 11.</strong> The installer detects Node.js, handles PATH, and sets up the gateway service without any terminal work.</p>
   </div>
-
-  <hr id="option-wsl2">
-
-  <h2>Option 3 &mdash; WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
-
-  <p>OpenClaw&rsquo;s official docs recommend installing inside WSL2 (Windows Subsystem for Linux) because the Linux runtime is more stable and tooling works without friction. But there&rsquo;s a major trade-off you should understand before going this route.</p>
-
-  <div class="callout callout-warn">
-    <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux &mdash; not on your actual Windows machine.</p>
-  </div>
-
-  <table>
-    <thead>
-      <tr><th>Feature</th><th>Native Windows (Options 1&ndash;2)</th><th>WSL2 (Option 3)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Access Windows files (<code>C:\Users\...</code>)</td><td class="yes">&#x2714; Directly</td><td class="partial">&#x26A0; Via <code>/mnt/c/</code>, slow</td></tr>
-      <tr><td>Run Windows apps (Explorer, Notepad...)</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
-      <tr><td>Execute PowerShell commands</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
-      <tr><td>Browser automation on your desktop</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Limited</td></tr>
-      <tr><td>Home Assistant / local network</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Needs port forwarding</td></tr>
-      <tr><td>Gateway reliability</td><td class="partial">Good (some known bugs)</td><td class="yes">Excellent</td></tr>
-      <tr><td>Skill compatibility</td><td class="partial">Good</td><td class="yes">Excellent</td></tr>
-      <tr><td>Works offline / local AI</td><td class="yes">&#x2714; Yes</td><td class="yes">&#x2714; Yes</td></tr>
-    </tbody>
-  </table>
-
-  <p><strong>Bottom line:</strong> WSL2 gives you a more stable OpenClaw experience, but it&rsquo;s a Linux AI assistant running in a sandbox &mdash; not a Windows AI. If you want your AI to help with Windows tasks (run scripts, manage files, automate apps), use Option 1 or 2. If you just want a chat/web/code assistant that&rsquo;s rock-solid, WSL2 is fine.</p>
-
-  <p>Full WSL2 setup guide: <a href="#wsl-prereqs">skip to WSL2 guide &darr;</a></p>
 
   <hr id="option-manual">
 
@@ -332,6 +302,36 @@ openclaw gateway status</code></pre>
 openclaw status</code></pre>
 
   <p><code>doctor</code> checks every component and tells you what&rsquo;s broken with fix suggestions.</p>
+
+  <hr id="option-wsl2">
+
+  <h2>Option 3 &mdash; WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
+
+  <p>OpenClaw&rsquo;s official docs recommend installing inside WSL2 (Windows Subsystem for Linux) because the Linux runtime is more stable and tooling works without friction. But there&rsquo;s a major trade-off you should understand before going this route.</p>
+
+  <div class="callout callout-warn">
+    <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux &mdash; not on your actual Windows machine.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Native Windows (Options 1&ndash;2)</th><th>WSL2 (Option 3)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Access Windows files (<code>C:\Users\...</code>)</td><td class="yes">&#x2714; Directly</td><td class="partial">&#x26A0; Via <code>/mnt/c/</code>, slow</td></tr>
+      <tr><td>Run Windows apps (Explorer, Notepad...)</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
+      <tr><td>Execute PowerShell commands</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
+      <tr><td>Browser automation on your desktop</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Limited</td></tr>
+      <tr><td>Home Assistant / local network</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Needs port forwarding</td></tr>
+      <tr><td>Gateway reliability</td><td class="partial">Good (some known bugs)</td><td class="yes">Excellent</td></tr>
+      <tr><td>Skill compatibility</td><td class="partial">Good</td><td class="yes">Excellent</td></tr>
+      <tr><td>Works offline / local AI</td><td class="yes">&#x2714; Yes</td><td class="yes">&#x2714; Yes</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Bottom line:</strong> WSL2 gives you a more stable OpenClaw experience, but it&rsquo;s a Linux AI assistant running in a sandbox &mdash; not a Windows AI. If you want your AI to help with Windows tasks (run scripts, manage files, automate apps), use Option 1 or 2. If you just want a chat/web/code assistant that&rsquo;s rock-solid, WSL2 is fine.</p>
+
+  <p>Full WSL2 setup guide: <a href="#wsl-prereqs">skip to WSL2 guide &darr;</a></p>
 
   <hr id="wsl-prereqs">
 
