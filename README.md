@@ -1,6 +1,6 @@
-# 🧠 ClawHome — Your AI Brain. At Home.
+# 🧠 Clawhome - OpenClaw Installation Tutorials
 
-> Personal AI assistant that runs on your Windows PC. Connects to Telegram, Discord & WhatsApp. No subscriptions. No cloud. Yours forever.
+> OpenClaw. Personal AI assistant that runs on your PC. Connects to Telegram, Discord & WhatsApp. No subscriptions. No cloud. Yours forever.
 
 <!-- GIF placeholder — replace with actual demo recording -->
 <!-- ![ClawHome demo](demo.gif) -->
@@ -14,7 +14,7 @@
 
 ## What is this?
 
-ClawHome is a pre-configured [OpenClaw](https://github.com/openclaw/openclaw) setup for Windows, packaged as a one-click installer via [ChatterPC](https://chatterpc.com).
+Fastest way to get pre-configured [OpenClaw](https://github.com/openclaw/openclaw) setup for Windows, packaged as a one-click installer via [ChatterPC](https://chatterpc.com).
 
 You install it, link your Telegram bot, and your AI is live — right inside the apps you already use.
 
