@@ -1,4 +1,4 @@
-﻿ml>
+﻿
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -215,10 +215,18 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
+  <p style="font-size:.85rem;color:var(--fg2);margin-top:.5rem">Skip to: <a href="#step1">Install steps</a> &middot; <a href="#issues">Common issues</a> &middot; <a href="#commands">Useful commands</a></p>
+
+  <p style="font-size:.85rem;color:var(--fg2)">
+    Jump to:
+    <a href="#step1">Install steps &darr;</a> &middot;
+    <a href="#issues">Common issues &darr;</a> &middot;
+    <a href="#commands">Useful commands &darr;</a>
+  </p>
 
   <p>This installs OpenClaw directly on Windows &mdash; no virtual machine, no Linux layer in between. When done right, it&rsquo;s the most capable setup: your AI runs as a real Windows process with full access to your machine.</p>
 
-  <h3>Why native Windows beats WSL2 (when it works)</h3>
+  <h3>&#x2705; Why native Windows beats WSL2</h3>
 
   <p>WSL2 runs OpenClaw inside a Linux VM. It&rsquo;s reliable, but sandboxed &mdash; your AI lives in a box and can&rsquo;t touch Windows. Native Windows means your AI is actually <em>on</em> your machine. Things that work natively but not in WSL2:</p>
 
@@ -231,7 +239,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <li><strong>Local network without port forwarding</strong> &mdash; reach your NAS, printer, Home Assistant, local devices directly</li>
   </ul>
 
-  <h3>The catch</h3>
+  <h3>&#x26A0; The catch &mdash; known Windows friction</h3>
 
   <p>The manual install has some Windows-specific rough edges:</p>
   <ul>
@@ -242,7 +250,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <li><strong>Usernames with spaces or special characters</strong> &mdash; e.g. &ldquo;John Smith&rdquo; can break the gateway</li>
   </ul>
 
-  <p>All of these are fixed in the steps below. If you&rsquo;d rather skip this entirely, <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> handles it automatically.</p>
+  <p>All of these are fixed in the steps below and in the <a href="#issues">common issues section</a>. If you&rsquo;d rather skip this entirely, <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> handles it automatically.</p>
 
   <h3 id="prereqs">Prerequisites</h3>
 
@@ -319,7 +327,9 @@ openclaw status</code></pre>
 
   <h2>Option 3 &mdash; WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
 
-  <p>OpenClaw&rsquo;s official docs recommend installing inside WSL2 (Windows Subsystem for Linux) because the Linux runtime is more stable and tooling works without friction. But there&rsquo;s a major trade-off you should understand before going this route.</p>
+  <p><strong>WSL2 (Windows Subsystem for Linux 2)</strong> is a feature built into Windows 10/11 that runs a full Linux system silently inside your PC &mdash; its own terminal, files, and apps, completely separate from Windows. You won&rsquo;t see it on screen; it just runs in the background.</p>
+
+  <p>OpenClaw&rsquo;s official docs recommend this path because the Linux runtime is more reliable for Node.js tooling. The trade-off: OpenClaw ends up inside that Linux sandbox, not on your Windows machine. See the comparison table below. If you hit issues, jump to <a href="#wsl-issues">WSL2 common issues</a>.</p>
 
   <div class="callout callout-warn">
     <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux &mdash; not on your actual Windows machine.</p>
