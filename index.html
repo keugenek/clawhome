@@ -1,4 +1,4 @@
-﻿!DOCTYPE html>
+﻿DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -128,7 +128,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <body>
 
 <nav>
-  <a class="nav-logo" href="/">OpenClaw <span class="claw">Windows</span></a>
+  <a class="nav-logo" href="/">OpenClaw for Windows <span class="claw">Community Guide</span></a>
   <div class="nav-links">
     <a href="#install">Install</a>
     <a href="#issues">Troubleshooting</a>
@@ -175,8 +175,8 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <!-- Main content -->
 <main class="content">
 
-  <h1>Install OpenClaw on Windows</h1>
-  <p class="subtitle">Complete guide for Windows 10 &amp; 11 &mdash; one-click installer, manual setup, WSL2, and fixes for 13+ common issues.</p>
+  <h1>OpenClaw for Windows</h1>
+  <p class="subtitle">Community guide for Windows 10 &amp; 11 &mdash; one-click installer, manual npm setup, WSL2, and fixes for common issues.</p>
 
   <div class="badges">
     <a href="https://github.com/keugenek/clawhome/stargazers"><img src="https://img.shields.io/github/stars/keugenek/clawhome?style=social" alt="Stars"></a>
@@ -192,11 +192,11 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <h2>Choose your install path</h2>
 
   <div class="install-options">
-    <div class="option-card recommended">
-      <span class="option-badge badge-green">&#x2713; Recommended</span>
+    <div class="option-card">
+      <span class="option-badge badge-gray">Quickstart</span>
       <h3>&#x1F4E6; ChatterPC Installer</h3>
       <p>One-click MSI installer. Free to use, no registration required. Handles everything automatically &mdash; Node.js, PATH, Windows service.</p>
-      <a href="https://chatterpc.com/downloads" class="btn btn-primary">&#x2B07; Download Free</a>
+      <a href="https://chatterpc.com/downloads" class="btn btn-outline">&#x2B07; Download .msi</a>
     </div>
     <div class="option-card">
       <span class="option-badge badge-gray">Advanced</span>
@@ -214,21 +214,8 @@ tr:hover td{background:rgba(255,255,255,.02)}
 
   <h2>Option 1 &mdash; ChatterPC Installer</h2>
 
-  <p><strong>Free to use. No registration or account required.</strong></p>
-  <ol>
-    <li>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a></li>
-    <li>Run the installer &mdash; click through the setup wizard</li>
-    <li>When prompted, paste your <strong>Telegram bot token</strong> (get one from <a href="https://t.me/BotFather">@BotFather</a> &mdash; takes 30 seconds) and your <strong>AI API key</strong> (Anthropic / OpenAI)</li>
-    <li>The installer registers a Windows service &mdash; OpenClaw will start automatically with your PC</li>
-  </ol>
-
-  <p>That&rsquo;s it. Message your bot on Telegram and your AI is live.</p>
-
-  <div class="callout callout-tip">
-    <p><strong>Works on Windows 10 and 11.</strong> The installer detects Node.js, handles PATH, and sets up the gateway service without any terminal work.</p>
-  </div>
-
-  <hr id="option-manual">
+  <p>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run it, follow the wizard. Handles Node.js, PATH, and Windows service automatically. No terminal needed.</p>
+<hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
 
