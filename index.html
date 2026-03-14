@@ -215,44 +215,41 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
-  <p style="font-size:.85rem;color:var(--fg2);margin-top:.5rem">Skip to: <a href="#step1">Install steps</a> &middot; <a href="#issues">Common issues</a> &middot; <a href="#commands">Useful commands</a></p>
+  <div class="callout callout-warn">
+    <p><strong>Heads up:</strong> The native Windows install has rough edges &mdash; Node.js version conflicts, PATH issues, and the gateway stopping when you close the terminal. If you hit problems, <a href="#option-wsl2">WSL2 (Option 3)</a> is more stable. All known issues are documented in the <a href="#issues">troubleshooting section</a>.</p>
+  </div>
 
-  <p style="font-size:.85rem;color:var(--fg2)">
-    Jump to:
-    <a href="#step1">Install steps &darr;</a> &middot;
-    <a href="#issues">Common issues &darr;</a> &middot;
-    <a href="#commands">Useful commands &darr;</a>
-  </p>
+  <p>When it works, native Windows is the most powerful setup &mdash; your AI can control apps, run PowerShell, access files, and interact with your desktop. WSL2 can't do any of that.</p>
 
-  <p>This installs OpenClaw directly on Windows &mdash; no virtual machine, no Linux layer in between. When done right, it&rsquo;s the most capable setup: your AI runs as a real Windows process with full access to your machine.</p>
+  <details style="margin-bottom:1.5rem">
+    <summary style="cursor:pointer;color:var(--blue);font-size:.9rem;padding:.5rem 0">Why native Windows beats WSL2 (expand)</summary>
+    <div style="padding:1rem 0 0">
+      <p>WSL2 runs OpenClaw inside a Linux VM &mdash; sandboxed, can't touch Windows. Native means your AI is actually <em>on</em> your machine:</p>
+      <ul>
+        <li><strong>Control Windows apps</strong> &mdash; open Excel, browser, any app; click buttons, fill forms</li>
+        <li><strong>Full file access at full speed</strong> &mdash; read/write <code>C:\Users\You\Documents</code> instantly</li>
+        <li><strong>Run PowerShell</strong> &mdash; automate settings, registry, services</li>
+        <li><strong>Clipboard</strong> &mdash; read what you copied, paste into any app</li>
+        <li><strong>Screen &amp; UI automation</strong> &mdash; take screenshots, click things on screen</li>
+        <li><strong>Local network without port forwarding</strong> &mdash; NAS, printer, Home Assistant</li>
+      </ul>
+    </div>
+  </details>
 
-  <h3>&#x2705; Why native Windows beats WSL2</h3>
-
-  <p>WSL2 runs OpenClaw inside a Linux VM. It&rsquo;s reliable, but sandboxed &mdash; your AI lives in a box and can&rsquo;t touch Windows. Native Windows means your AI is actually <em>on</em> your machine. Things that work natively but not in WSL2:</p>
-
-  <ul>
-    <li><strong>Control Windows apps</strong> &mdash; open Excel, your browser, any app; click buttons, fill forms, automate UI</li>
-    <li><strong>Full file access at full speed</strong> &mdash; read and write <code>C:\Users\You\Documents</code> instantly, no path translation</li>
-    <li><strong>Run PowerShell</strong> &mdash; automate Windows settings, registry, services, scheduled tasks</li>
-    <li><strong>Clipboard</strong> &mdash; your AI can read what you copied and paste into any app</li>
-    <li><strong>Screen and UI automation</strong> &mdash; take screenshots, see your desktop, click things</li>
-    <li><strong>Local network without port forwarding</strong> &mdash; reach your NAS, printer, Home Assistant, local devices directly</li>
-  </ul>
-
-  <h3>&#x26A0; The catch &mdash; known Windows friction</h3>
-
-  <p>The manual install has some Windows-specific rough edges:</p>
-  <ul>
-    <li><strong>Node.js version</strong> &mdash; must be 22+. Node 18 or 20 will silently fail with confusing errors</li>
-    <li><strong>PATH doesn&rsquo;t update automatically</strong> &mdash; after installing, you often need to restart the terminal before commands work</li>
-    <li><strong>Gateway closes with the terminal</strong> &mdash; you need to install it as a Windows service or your AI stops when you close the window</li>
-    <li><strong>PowerShell execution policy</strong> &mdash; Windows blocks scripts by default; one-time fix required</li>
-    <li><strong>Usernames with spaces or special characters</strong> &mdash; e.g. &ldquo;John Smith&rdquo; can break the gateway</li>
-  </ul>
-
-  <p>All of these are fixed in the steps below and in the <a href="#issues">common issues section</a>. If you&rsquo;d rather skip this entirely, <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> handles it automatically.</p>
-
-  <h3 id="prereqs">Prerequisites</h3>
+  <details style="margin-bottom:1.5rem">
+    <summary style="cursor:pointer;color:var(--blue);font-size:.9rem;padding:.5rem 0">&#x26A0;&#xFE0F; Known friction points (expand)</summary>
+    <div style="padding:1rem 0 0">
+      <ul>
+        <li><strong>Node.js must be v22+</strong> &mdash; older versions silently fail</li>
+        <li><strong>PATH doesn't update automatically</strong> &mdash; restart the terminal after installing</li>
+        <li><strong>Gateway closes with the terminal</strong> &mdash; must install as a Windows service</li>
+        <li><strong>PowerShell execution policy</strong> &mdash; one-time fix required</li>
+        <li><strong>Usernames with spaces or special characters</strong> &mdash; can break the gateway</li>
+      </ul>
+      <p style="margin-top:.75rem">All fixes are in the <a href="#issues">troubleshooting section</a>. Or use <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> to skip all of this.</p>
+    </div>
+  </details>
+<h3 id="prereqs">Prerequisites</h3>
 
   <table>
     <thead><tr><th>Requirement</th><th>Version</th><th>Check</th></tr></thead>
