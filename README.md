@@ -1,4 +1,4 @@
-# 🧠 Clawhome - OpenClaw Installation Tutorials
+# 🧠 ClawHome - OpenClaw Installation Tutorial (Windows)
 
 > OpenClaw. Personal AI assistant that runs on your PC. Connects to Telegram, Discord & WhatsApp. No subscriptions. No cloud. Yours forever.
 
