@@ -1,334 +1,615 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClawHome &mdash; Your AI Brain. At Home.</title>
-<meta name="description" content="Buy a node &mdash; get a free AI assistant forever. No subscriptions. Gets smarter with every node sold.">
-<meta property="og:title" content="ClawHome &mdash; Your AI Brain. At Home.">
-<meta property="og:description" content="Buy a node &mdash; get a free AI assistant forever. No subscriptions. Gets smarter with every node sold.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://clawhome.ai">
+<title>Install OpenClaw on Windows &mdash; Complete Guide | ClawHome</title>
+<meta name="description" content="How to install OpenClaw on Windows 10 and 11. One-click installer via ChatterPC, manual npm install, WSL2 guide, and fixes for 13+ common Windows issues.">
+<meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide">
+<meta property="og:title" content="Install OpenClaw on Windows &mdash; Complete Guide">
+<meta property="og:description" content="One-click installer, manual npm guide, WSL2 setup, and fixes for common Windows issues. Free to use, no registration required.">
+<meta property="og:url" content="https://keugenek.github.io/clawhome/">
+<link rel="canonical" href="https://keugenek.github.io/clawhome/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F9E0;</text></svg>">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--fg:#e6edf3;--fg2:#8b949e;--accent:#f97316;--accent2:#fb923c;--radius:12px}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
-a{color:var(--accent);text-decoration:none}
-a:hover{color:var(--accent2)}
-
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(249,115,22,.2)}50%{box-shadow:0 0 40px rgba(249,115,22,.4)}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+  --fg:#e6edf3;--fg2:#8b949e;
+  --accent:#f97316;--accent2:#fb923c;
+  --green:#22c55e;--red:#ef4444;--blue:#58a6ff;
+  --radius:12px;
+  --sidebar:260px
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;overflow-x:hidden}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--accent);text-decoration:underline}
 
 /* Nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
-nav .logo{font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
-nav .logo span{color:var(--accent)}
-nav .links{display:flex;gap:1.5rem;align-items:center}
-nav .links a{color:var(--fg2);font-size:.875rem;transition:color .2s}
-nav .links a:hover{color:var(--fg)}
-.nav-cta{background:var(--accent)!important;color:#fff!important;padding:.5rem 1.25rem;border-radius:8px;font-weight:600;font-size:.875rem;transition:background .2s}
-.nav-cta:hover{background:var(--accent2)!important}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:.75rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:1.1rem;font-weight:700;color:var(--fg);display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.nav-logo .claw{color:var(--accent)}
+.nav-links{display:flex;gap:1rem;align-items:center}
+.nav-links a{color:var(--fg2);font-size:.85rem;transition:color .2s;text-decoration:none}
+.nav-links a:hover{color:var(--fg)}
+.nav-dl{background:var(--accent);color:#fff!important;padding:.4rem 1rem;border-radius:6px;font-weight:600;font-size:.85rem}
+.nav-dl:hover{background:var(--accent2)!important;text-decoration:none!important}
 
-/* Hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(249,115,22,.08) 0%,transparent 50%);animation:float 8s ease-in-out infinite}
-.hero-badge{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);color:var(--accent);padding:.4rem 1.2rem;border-radius:100px;font-size:.85rem;font-weight:500;margin-bottom:2rem;animation:fadeUp .8s ease both}
-.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;animation:fadeUp .8s ease .1s both;letter-spacing:-.02em}
-.hero h1 .accent{color:var(--accent)}
-.hero p{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--fg2);max-width:650px;margin-bottom:2.5rem;animation:fadeUp .8s ease .2s both}
-.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s ease .3s both}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;border-radius:var(--radius);font-size:1.05rem;font-weight:600;transition:all .25s ease;cursor:pointer;border:none;text-decoration:none}
-.btn-primary{background:var(--accent);color:#fff;animation:glow 3s ease-in-out infinite}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);color:#fff}
-.btn-secondary{background:transparent;color:var(--fg);border:1px solid var(--bg3)}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.hero-sub{margin-top:2rem;color:var(--fg2);font-size:.85rem;animation:fadeUp .8s ease .4s both}
+/* Layout */
+.layout{display:flex;min-height:100vh;padding-top:52px}
 
-/* Sections */
-section{padding:6rem 2rem}
-.container{max-width:1100px;margin:0 auto}
-.section-label{text-transform:uppercase;font-size:.8rem;letter-spacing:.15em;color:var(--accent);font-weight:600;margin-bottom:.75rem}
-.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;letter-spacing:-.01em}
-.section-sub{color:var(--fg2);font-size:1.1rem;max-width:600px;margin-bottom:3rem}
+/* Sidebar */
+.sidebar{position:fixed;top:52px;left:0;width:var(--sidebar);height:calc(100vh - 52px);overflow-y:auto;padding:1.5rem 1rem;border-right:1px solid rgba(255,255,255,.06);background:var(--bg)}
+.sidebar h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg2);font-weight:600;margin-bottom:.5rem;margin-top:1.25rem;padding:0 .5rem}
+.sidebar h4:first-child{margin-top:0}
+.sidebar a{display:block;padding:.35rem .5rem;border-radius:6px;color:var(--fg2);font-size:.82rem;transition:all .15s;text-decoration:none}
+.sidebar a:hover{color:var(--fg);background:var(--bg3)}
+.sidebar a.active{color:var(--accent);background:rgba(249,115,22,.08)}
 
-/* How it works */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:2rem;transition:all .3s ease}
-.card:hover{border-color:rgba(249,115,22,.3);transform:translateY(-4px)}
-.card-icon{font-size:2.5rem;margin-bottom:1rem;display:block}
-.card h3{font-size:1.25rem;margin-bottom:.75rem;font-weight:600}
-.card p{color:var(--fg2);font-size:.95rem;line-height:1.7}
+/* Content */
+.content{margin-left:var(--sidebar);flex:1;max-width:900px;padding:3rem 3rem 6rem;min-width:0}
 
-/* Comparison */
-.comparison{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-.comp-row{display:grid;grid-template-columns:1.5fr repeat(3,1fr);padding:1rem 1.5rem;align-items:center;font-size:.95rem}
-.comp-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,.04)}
-.comp-header{background:var(--bg3);font-weight:600;font-size:.85rem;color:var(--fg2);text-transform:uppercase;letter-spacing:.05em}
-.comp-highlight{background:rgba(249,115,22,.06)}
-.comp-highlight .comp-val{color:var(--accent);font-weight:700}
-.comp-val{text-align:center}
-.comp-label{font-weight:500}
-.comp-note{text-align:center;padding:2rem;color:var(--fg2);font-size:1rem}
-.comp-note strong{color:var(--accent)}
+/* Prose */
+.content h1{font-size:2rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.02em;line-height:1.2}
+.content h1 + p.subtitle{color:var(--fg2);font-size:1.1rem;margin-bottom:2rem}
+.content h2{font-size:1.5rem;font-weight:700;margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);letter-spacing:-.01em}
+.content h2:first-of-type{border-top:none;margin-top:1.5rem}
+.content h3{font-size:1.15rem;font-weight:600;margin:2rem 0 .75rem;color:var(--fg)}
+.content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 .5rem;color:var(--fg2)}
+.content p{margin-bottom:1rem;color:var(--fg)}
+.content ul,.content ol{margin:0 0 1rem 1.5rem}
+.content li{margin-bottom:.35rem;color:var(--fg)}
+.content strong{color:var(--fg);font-weight:600}
+.content hr{border:none;border-top:1px solid rgba(255,255,255,.06);margin:2.5rem 0}
 
-/* Network */
-.network-visual{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:3rem 0}
-.net-stage{text-align:center;padding:2rem;background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);min-width:200px;flex:1;max-width:280px;transition:all .3s ease}
-.net-stage:hover{border-color:rgba(249,115,22,.3);transform:translateY(-4px)}
-.net-nodes{font-size:2.5rem;font-weight:800;color:var(--accent);display:block}
-.net-label{color:var(--fg2);font-size:.85rem;margin:.5rem 0}
-.net-model{font-size:1.1rem;font-weight:600}
-.net-arrow{display:flex;align-items:center;color:var(--fg2);font-size:1.5rem}
+/* Badges */
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.badges img{height:20px}
 
-/* Features */
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
-.feature{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);transition:all .3s ease}
-.feature:hover{border-color:rgba(249,115,22,.2)}
-.feature-icon{font-size:1.5rem;flex-shrink:0;width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:rgba(249,115,22,.1);border-radius:8px}
-.feature h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
-.feature p{color:var(--fg2);font-size:.85rem}
+/* Code */
+pre{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.25rem 1.5rem;overflow-x:auto;margin-bottom:1.25rem}
+code{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:.875rem;line-height:1.6}
+p code,li code{background:rgba(255,255,255,.07);padding:.15em .4em;border-radius:4px;font-size:.85em;color:var(--fg)}
 
-/* Waitlist */
-.waitlist-section{text-align:center}
-.waitlist-box{background:var(--bg2);border:1px solid rgba(249,115,22,.2);border-radius:var(--radius);padding:3rem 2rem;max-width:550px;margin:0 auto}
-.waitlist-box h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
-.waitlist-box p{color:var(--fg2);margin-bottom:2rem}
-.cta-buttons{display:flex;gap:.75rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.waitlist-note{margin-top:1rem;font-size:.8rem;color:var(--fg2)}
+/* Tables */
+table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.9rem}
+th{background:var(--bg3);padding:.6rem 1rem;text-align:left;font-size:.8rem;font-weight:600;color:var(--fg2);text-transform:uppercase;letter-spacing:.05em}
+td{padding:.6rem 1rem;border-bottom:1px solid rgba(255,255,255,.04)}
+tr:hover td{background:rgba(255,255,255,.02)}
+.yes{color:var(--green)}
+.no{color:var(--red)}
+.partial{color:var(--accent)}
 
-/* Footer */
-footer{border-top:1px solid rgba(255,255,255,.06);padding:3rem 2rem;text-align:center;color:var(--fg2);font-size:.85rem}
-footer .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
-footer .footer-links a{color:var(--fg2);transition:color .2s}
-footer .footer-links a:hover{color:var(--accent)}
-footer p{margin:.25rem 0}
+/* Callouts */
+.callout{padding:1rem 1.25rem;border-radius:var(--radius);margin-bottom:1.25rem;border-left:3px solid}
+.callout-tip{background:rgba(34,197,94,.06);border-color:var(--green)}
+.callout-warn{background:rgba(249,115,22,.06);border-color:var(--accent)}
+.callout-info{background:rgba(88,166,255,.06);border-color:var(--blue)}
+.callout p{margin:0;font-size:.9rem}
+.callout strong{display:block;margin-bottom:.25rem}
+
+/* Install option cards */
+.install-options{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.option-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.5rem;transition:border-color .2s}
+.option-card.recommended{border-color:rgba(249,115,22,.4)}
+.option-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:100px;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-gray{background:rgba(139,148,158,.15);color:var(--fg2)}
+.option-card h3{margin:0 0 .5rem;font-size:1rem}
+.option-card p{margin:0 0 1rem;font-size:.85rem;color:var(--fg2)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border-radius:8px;font-size:.9rem;font-weight:600;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);color:#fff;text-decoration:none;transform:translateY(-1px)}
+.btn-outline{border:1px solid var(--bg3);color:var(--fg2)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Issue blocks */
+.issue{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem}
+.issue-title{display:flex;align-items:center;gap:.5rem;font-weight:600;margin-bottom:.75rem;font-size:.95rem}
+.issue-title .dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+.issue p{margin-bottom:.5rem;font-size:.9rem}
+.issue p:last-child{margin-bottom:0}
+.issue-meta{font-size:.8rem;color:var(--fg2);margin-bottom:.5rem}
+
+/* Steps */
+.step-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.step-num{width:2rem;height:2rem;border-radius:50%;background:rgba(249,115,22,.15);color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
 
 /* Mobile */
 @media(max-width:768px){
-  nav .links a:not(.nav-cta){display:none}
-  .comp-row{grid-template-columns:1.2fr repeat(3,1fr);font-size:.8rem;padding:.8rem 1rem}
-  .net-arrow{display:none}
-  section{padding:4rem 1.5rem}
-}
-@media(max-width:480px){
-  .hero{padding:6rem 1.25rem 3rem}
-  .hero-buttons{flex-direction:column;width:100%}
-  .btn{justify-content:center;width:100%}
-  .cta-buttons{flex-direction:column;width:100%}
+  .sidebar{display:none}
+  .content{margin-left:0;padding:1.5rem}
+  .install-options{grid-template-columns:1fr}
+  .nav-links a:not(.nav-dl){display:none}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">&#x1F9E0; <span>ClawHome</span></div>
-  <div class="links">
-    <a href="#how">How It Works</a>
-    <a href="#compare">Pricing</a>
-    <a href="#features">Features</a>
-    <a href="guide">Windows Guide</a>
-    <a href="#download" class="nav-cta">Download Free</a>
+  <a class="nav-logo" href="/">&#x1F9E0; Claw<span class="claw">Home</span></a>
+  <div class="nav-links">
+    
+    
+    <a href="https://github.com/keugenek/clawhome">GitHub</a>
+    <a href="https://chatterpc.com/downloads" class="nav-dl">&#x2B07; Download</a>
   </div>
 </nav>
 
-<section class="hero">
-  <span class="hero-badge">&#x2728; AI that lives on your machine</span>
-  <h1>&#x1F9E0; ClawHome &mdash; Your AI Brain.<br><span class="accent">At Home.</span></h1>
-  <p>Install once &mdash; get a personal AI assistant forever. No subscriptions. Connects to Telegram, Discord &amp; WhatsApp. Gets smarter with every update.</p>
-  <div class="hero-buttons">
-    <a href="#download" class="btn btn-primary">&#x2B07; Download Free</a>
-    <a href="#compare" class="btn btn-secondary">See how it compares</a>
-  </div>
-  <p class="hero-sub">Free forever &middot; Windows &middot; Open source (MIT)</p>
-</section>
+<div class="layout">
 
-<section id="how">
-  <div class="container reveal">
-    <div class="section-label">How It Works</div>
-    <div class="section-title">Simple. Private. Powerful.</div>
-    <div class="section-sub">Install and connect in under 3 minutes.</div>
-    <div class="cards">
-      <div class="card">
-        <span class="card-icon">&#x1F512;</span>
-        <h3>Private</h3>
-        <p>Your data never leaves your home. Local AI, local storage, local control. No cloud middleman.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">&#x1F9E0;</span>
-        <h3>Smart</h3>
-        <p>Powered by the latest models. Remembers context, runs skills, and gets better with every update &mdash; automatically.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">&#x1F310;</span>
-        <h3>Connected</h3>
-        <p>Telegram, WhatsApp, Discord. Your AI, everywhere you chat. One brain, every platform.</p>
-      </div>
+<!-- Sidebar TOC -->
+<aside class="sidebar">
+  <h4>Install Options</h4>
+  <a href="#install">Choose your path</a>
+  <a href="#option-chatterpc">Option 1 &mdash; ChatterPC</a>
+  <a href="#option-manual">Option 2 &mdash; Manual (Windows)</a>
+  <a href="#option-wsl2">Option 3 &mdash; WSL2</a>
+
+  <h4>Manual Guide</h4>
+  <a href="#prereqs">Prerequisites</a>
+  <a href="#step1">Step 1 &mdash; Install</a>
+  <a href="#step2">Step 2 &mdash; Onboarding</a>
+  <a href="#step3">Step 3 &mdash; Gateway</a>
+  <a href="#step4">Step 4 &mdash; Telegram</a>
+  <a href="#step5">Step 5 &mdash; Verify</a>
+
+  <h4>WSL2 Guide</h4>
+  <a href="#wsl-prereqs">WSL2 Prerequisites</a>
+  <a href="#wsl-step1">Step 1 &mdash; Install WSL2</a>
+  <a href="#wsl-step2">Step 2 &mdash; Enable systemd</a>
+  <a href="#wsl-step3">Step 3 &mdash; Install OpenClaw</a>
+  <a href="#wsl-step4">Step 4 &mdash; Onboarding</a>
+  <a href="#wsl-step5">Step 5 &mdash; Telegram</a>
+  <a href="#wsl-autostart">Auto-start with Windows</a>
+  <a href="#wsl-network">Network &amp; LAN access</a>
+  <a href="#wsl-issues">WSL2 issues</a>
+
+  <h4>Troubleshooting</h4>
+  <a href="#issues">Common Windows problems</a>
+  <a href="#commands">Useful commands</a>
+  <a href="#help">Get help</a>
+</aside>
+
+<!-- Main content -->
+<main class="content">
+
+  <h1>Install OpenClaw on Windows</h1>
+  <p class="subtitle">Complete guide for Windows 10 &amp; 11 &mdash; one-click installer, manual setup, WSL2, and fixes for 13+ common issues.</p>
+
+  <div class="badges">
+    <a href="https://github.com/keugenek/clawhome/stargazers"><img src="https://img.shields.io/github/stars/keugenek/clawhome?style=social" alt="Stars"></a>
+    <img src="https://img.shields.io/badge/powered%20by-OpenClaw-orange" alt="OpenClaw">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT">
+    <img src="https://img.shields.io/badge/download-chatterpc.com-brightgreen" alt="Download">
+  </div>
+
+  <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is a self-hosted personal AI assistant &mdash; no subscriptions, no cloud, your data stays local. It runs as a background service and connects to Telegram, Discord, and WhatsApp. This guide covers every way to get it running on Windows, with fixes for the issues you&rsquo;ll actually hit.</p>
+
+  <hr id="install">
+
+  <h2>Choose your install path</h2>
+
+  <div class="install-options">
+    <div class="option-card recommended">
+      <span class="option-badge badge-green">&#x2713; Recommended</span>
+      <h3>&#x1F4E6; ChatterPC Installer</h3>
+      <p>One-click MSI installer. Free to use, no registration required. Handles everything automatically &mdash; Node.js, PATH, Windows service.</p>
+      <a href="https://chatterpc.com/downloads" class="btn btn-primary">&#x2B07; Download Free</a>
+    </div>
+    <div class="option-card">
+      <span class="option-badge badge-gray">Advanced</span>
+      <h3>&#x1F527; Manual install</h3>
+      <p>npm + PowerShell. Full control over the setup. For developers who want to customise the install or understand exactly what&rsquo;s happening.</p>
+      <a href="#option-manual" class="btn btn-outline">See manual guide &darr;</a>
     </div>
   </div>
-</section>
 
-<section id="compare" style="background:var(--bg2)">
-  <div class="container reveal">
-    <div class="section-label">Pricing</div>
-    <div class="section-title">Stop renting your AI</div>
-    <div class="section-sub">One download. Yours forever.</div>
-    <div class="comparison">
-      <div class="comp-row comp-header">
-        <div></div>
-        <div class="comp-val">&#x1F9E0; ClawHome</div>
-        <div class="comp-val">ChatGPT Plus</div>
-        <div class="comp-val">Claude Pro</div>
-      </div>
-      <div class="comp-row comp-highlight">
-        <div class="comp-label">Price</div>
-        <div class="comp-val">Free</div>
-        <div class="comp-val">$20/mo</div>
-        <div class="comp-val">$20/mo</div>
-      </div>
-      <div class="comp-row">
-        <div class="comp-label">Year 1 cost</div>
-        <div class="comp-val" style="color:var(--accent);font-weight:600">$0</div>
-        <div class="comp-val">$240</div>
-        <div class="comp-val">$240</div>
-      </div>
-      <div class="comp-row">
-        <div class="comp-label">Year 2 cost</div>
-        <div class="comp-val" style="color:var(--accent);font-weight:600">$0</div>
-        <div class="comp-val">$240</div>
-        <div class="comp-val">$240</div>
-      </div>
-      <div class="comp-row">
-        <div class="comp-label">Your data</div>
-        <div class="comp-val">&#x1F3E0; Stays home</div>
-        <div class="comp-val">&#x26A0; Their servers</div>
-        <div class="comp-val">&#x26A0; Their servers</div>
-      </div>
-      <div class="comp-row">
-        <div class="comp-label">Telegram / Discord</div>
-        <div class="comp-val">&#x2705; Built-in</div>
-        <div class="comp-val">&#x274C; No</div>
-        <div class="comp-val">&#x274C; No</div>
-      </div>
-      <div class="comp-row">
-        <div class="comp-label">Ownership</div>
-        <div class="comp-val">&#x2705; Yours</div>
-        <div class="comp-val">&#x274C; Rented</div>
-        <div class="comp-val">&#x274C; Rented</div>
-      </div>
-    </div>
-    <div class="comp-note">After <strong>day 1</strong>, ClawHome is already cheaper. And it&rsquo;s <strong>YOURS</strong>.</div>
+  <div class="callout callout-info">
+    <p><strong>Not sure which to pick?</strong> Use ChatterPC. The manual path is for people who are comfortable in a terminal and want to manage dependencies themselves. Both end up with the same OpenClaw installation.</p>
   </div>
-</section>
 
-<section id="network">
-  <div class="container reveal">
-    <div class="section-label" style="text-align:center">AI Models</div>
-    <div class="section-title" style="text-align:center">Connect any model. Use the best.</div>
-    <div class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto">ClawHome connects to cloud models or runs local AI on your GPU. Your choice.</div>
-    <div class="network-visual">
-      <div class="net-stage">
-        <span class="net-nodes">&#x2601;</span>
-        <div class="net-label">cloud mode</div>
-        <div class="net-model">GPT-4o / Claude</div>
-      </div>
-      <div class="net-arrow">&#x2192;</div>
-      <div class="net-stage">
-        <span class="net-nodes">&#x1F4BB;</span>
-        <div class="net-label">local mode</div>
-        <div class="net-model">Llama / Mistral</div>
-      </div>
-      <div class="net-arrow">&#x2192;</div>
-      <div class="net-stage">
-        <span class="net-nodes">&#x1F9E0;</span>
-        <div class="net-label">your choice</div>
-        <div class="net-model">Mix &amp; Match</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <hr id="option-chatterpc">
 
-<section id="features" style="background:var(--bg2)">
-  <div class="container reveal">
-    <div class="section-label">Features</div>
-    <div class="section-title">Everything you need. Nothing you don&rsquo;t.</div>
-    <div class="section-sub">All built-in. No extras to buy.</div>
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">&#x1F3A4;</div>
-        <div><h4>Voice Control</h4><p>Whisper-powered speech recognition. Send voice messages, get smart replies.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F4F7;</div>
-        <div><h4>Vision</h4><p>Send a photo &mdash; your AI understands it. Great for receipts, screenshots, docs.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F3E0;</div>
-        <div><h4>Smart Home</h4><p>Home Assistant integration. Control your home with natural language.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x23F0;</div>
-        <div><h4>Reminders &amp; Cron</h4><p>Set reminders, schedule tasks, get morning briefings. Proactive, not reactive.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F4AC;</div>
-        <div><h4>Multi-Channel</h4><p>Telegram, WhatsApp, Discord. One AI, everywhere you chat.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F9E9;</div>
-        <div><h4>Skills &amp; Plugins</h4><p>100+ integrations: GitHub, Notion, Google, weather, eBay and more.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F6E1;</div>
-        <div><h4>Privacy-First</h4><p>Everything runs locally. Your data never leaves your network.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">&#x1F4D6;</div>
-        <div><h4>Open Source</h4><p>MIT licensed. Inspect, modify, contribute. It&rsquo;s yours.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <h2>Option 1 &mdash; ChatterPC Installer</h2>
 
-<section id="download" class="waitlist-section">
-  <div class="container reveal">
-    <div class="section-label">Download</div>
-    <div class="section-title">Get yours today. It&rsquo;s free.</div>
-    <div class="waitlist-box">
-      <h3>&#x1F9E0; ClawHome</h3>
-      <p>Your AI brain, running at home. Install, connect Telegram &mdash; done in 3 minutes.</p>
-      <div class="cta-buttons">
-        <a href="https://chatterpc.com/downloads" class="btn btn-primary">&#x2B07; Download for Windows</a>
-        <a href="guide" class="btn btn-secondary">&#x1F4D6; Windows Install Guide</a>
-      </div>
-      <div class="waitlist-note">Free forever &middot; Open source (MIT) &middot; No account required</div>
-    </div>
-  </div>
-</section>
+  <p><strong>Free to use. No registration or account required.</strong></p>
+  <ol>
+    <li>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a></li>
+    <li>Run the installer &mdash; click through the setup wizard</li>
+    <li>When prompted, paste your <strong>Telegram bot token</strong> (get one from <a href="https://t.me/BotFather">@BotFather</a> &mdash; takes 30 seconds) and your <strong>AI API key</strong> (Anthropic / OpenAI)</li>
+    <li>The installer registers a Windows service &mdash; OpenClaw will start automatically with your PC</li>
+  </ol>
 
-<footer>
-  <div class="footer-links">
-    <a href="https://github.com/keugenek/clawhome">GitHub</a>
-    <a href="https://chatterpc.com">ChatterPC</a>
-    <a href="https://discord.com/invite/clawd">Discord</a>
-    <a href="mailto:hello@clawhome.ai">Contact</a>
+  <p>That&rsquo;s it. Message your bot on Telegram and your AI is live.</p>
+
+  <div class="callout callout-tip">
+    <p><strong>Works on Windows 10 and 11.</strong> The installer detects Node.js, handles PATH, and sets up the gateway service without any terminal work.</p>
   </div>
-  <p>Built by <strong>VoxelMosaic</strong> &mdash; London, UK</p>
-  <p>Powered by <a href="https://github.com/keugenek/clawhome">OpenClaw</a> (MIT)</p>
-</footer>
+
+  <hr id="option-wsl2">
+
+  <h2>Option 3 &mdash; WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
+
+  <p>OpenClaw&rsquo;s official docs recommend installing inside WSL2 (Windows Subsystem for Linux) because the Linux runtime is more stable and tooling works without friction. But there&rsquo;s a major trade-off you should understand before going this route.</p>
+
+  <div class="callout callout-warn">
+    <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux &mdash; not on your actual Windows machine.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Native Windows (Options 1&ndash;2)</th><th>WSL2 (Option 3)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Access Windows files (<code>C:\Users\...</code>)</td><td class="yes">&#x2714; Directly</td><td class="partial">&#x26A0; Via <code>/mnt/c/</code>, slow</td></tr>
+      <tr><td>Run Windows apps (Explorer, Notepad...)</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
+      <tr><td>Execute PowerShell commands</td><td class="yes">&#x2714; Yes</td><td class="no">&#x2716; No</td></tr>
+      <tr><td>Browser automation on your desktop</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Limited</td></tr>
+      <tr><td>Home Assistant / local network</td><td class="yes">&#x2714; Yes</td><td class="partial">&#x26A0; Needs port forwarding</td></tr>
+      <tr><td>Gateway reliability</td><td class="partial">Good (some known bugs)</td><td class="yes">Excellent</td></tr>
+      <tr><td>Skill compatibility</td><td class="partial">Good</td><td class="yes">Excellent</td></tr>
+      <tr><td>Works offline / local AI</td><td class="yes">&#x2714; Yes</td><td class="yes">&#x2714; Yes</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Bottom line:</strong> WSL2 gives you a more stable OpenClaw experience, but it&rsquo;s a Linux AI assistant running in a sandbox &mdash; not a Windows AI. If you want your AI to help with Windows tasks (run scripts, manage files, automate apps), use Option 1 or 2. If you just want a chat/web/code assistant that&rsquo;s rock-solid, WSL2 is fine.</p>
+
+  <p>Full WSL2 setup guide: <a href="#wsl-prereqs">skip to WSL2 guide &darr;</a></p>
+
+  <hr id="option-manual">
+
+  <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
+
+  <h3 id="prereqs">Prerequisites</h3>
+
+  <table>
+    <thead><tr><th>Requirement</th><th>Version</th><th>Check</th></tr></thead>
+    <tbody>
+      <tr><td>Windows</td><td>10 / 11</td><td><code>winver</code></td></tr>
+      <tr><td>Node.js</td><td><strong>22 or higher</strong></td><td><code>node --version</code></td></tr>
+      <tr><td>Git</td><td>Any</td><td><code>git --version</code></td></tr>
+      <tr><td>PowerShell</td><td>5.1+</td><td><code>$PSVersionTable</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-warn">
+    <p><strong>Node.js version matters.</strong> Node 18 and 20 cause silent failures. Install Node 22 from <a href="https://nodejs.org">nodejs.org</a> or run: <code>winget install OpenJS.NodeJS.LTS</code></p>
+  </div>
+
+  <h3 id="step1">Step 1 &mdash; Install</h3>
+  <div class="step-header"><div class="step-num">1</div><strong>Open PowerShell as Administrator</strong></div>
+
+<pre><code class="language-powershell"># Allow scripts to run (if not already set)
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Install OpenClaw
+npm install -g openclaw
+
+# Verify
+openclaw --version</code></pre>
+
+  <h3 id="step2">Step 2 &mdash; Run onboarding</h3>
+  <div class="step-header"><div class="step-num">2</div><strong>Run the setup wizard</strong></div>
+
+<pre><code class="language-powershell">openclaw onboard</code></pre>
+
+  <p>The wizard asks for:</p>
+  <ul>
+    <li><strong>AI model API key</strong> (Anthropic Claude / OpenAI / etc.)</li>
+    <li><strong>Telegram bot token</strong> (from <a href="https://t.me/BotFather">@BotFather</a> &mdash; takes 30 seconds)</li>
+    <li><strong>Gateway service install</strong> &mdash; say yes, this makes OpenClaw start with Windows</li>
+  </ul>
+
+  <div class="callout callout-tip">
+    <p>If onboarding hangs at the gateway health check: <code>openclaw onboard --skip-health</code>, then start the gateway manually after.</p>
+  </div>
+
+  <h3 id="step3">Step 3 &mdash; Start the gateway</h3>
+  <div class="step-header"><div class="step-num">3</div><strong>Install as a Windows service</strong></div>
+
+<pre><code class="language-powershell"># Install as a Windows Scheduled Task (runs on startup)
+openclaw gateway install
+
+# Check it's running
+openclaw gateway status</code></pre>
+
+  <h3 id="step4">Step 4 &mdash; Connect Telegram</h3>
+  <div class="step-header"><div class="step-num">4</div><strong>Link your bot</strong></div>
+  <ol>
+    <li>Open <a href="https://t.me/BotFather">@BotFather</a> on Telegram</li>
+    <li>Send <code>/newbot</code> &rarr; name it &rarr; copy the token</li>
+    <li>Run <code>openclaw configure</code> &rarr; select <strong>Telegram</strong> &rarr; paste token</li>
+  </ol>
+
+  <p>Message your bot on Telegram. You should get a response. &#x2705;</p>
+
+  <h3 id="step5">Step 5 &mdash; Verify</h3>
+  <div class="step-header"><div class="step-num">5</div><strong>Run the health check</strong></div>
+
+<pre><code class="language-powershell">openclaw doctor
+openclaw status</code></pre>
+
+  <p><code>doctor</code> checks every component and tells you what&rsquo;s broken with fix suggestions.</p>
+
+  <hr id="wsl-prereqs">
+
+  <h2>WSL2 Install Guide</h2>
+
+  <div class="callout callout-warn">
+    <p><strong>Reminder:</strong> OpenClaw in WSL2 runs inside a Linux VM. It cannot control your Windows desktop, run PowerShell, or access Windows apps natively. Read the <a href="#option-wsl2">comparison table</a> above before proceeding.</p>
+  </div>
+
+  <p><strong>Requirements:</strong> Windows 10 v2004+ or Windows 11, virtualization enabled in BIOS, ~5 GB free disk space.</p>
+
+  <h3 id="wsl-step1">Step 1 &mdash; Install WSL2 and Ubuntu</h3>
+
+<pre><code class="language-powershell"># Open PowerShell as Administrator:
+wsl --install
+
+# Or pick Ubuntu explicitly:
+wsl --install -d Ubuntu-24.04</code></pre>
+
+  <p>Reboot when prompted. If <code>wsl --install</code> fails, enable virtualization in BIOS first.</p>
+
+  <h3 id="wsl-step2">Step 2 &mdash; Enable systemd (required for gateway)</h3>
+
+  <p>Open your Ubuntu terminal (search &ldquo;Ubuntu&rdquo; in Start menu):</p>
+
+<pre><code class="language-bash">sudo tee /etc/wsl.conf > /dev/null << 'EOF'
+[boot]
+systemd=true
+EOF</code></pre>
+
+  <p>Then from PowerShell:</p>
+
+<pre><code class="language-powershell">wsl --shutdown</code></pre>
+
+  <p>Re-open Ubuntu and verify:</p>
+
+<pre><code class="language-bash">systemctl --user status
+# Should say "active" -- if "Failed to connect", systemd is not running</code></pre>
+
+  <h3 id="wsl-step3">Step 3 &mdash; Install OpenClaw</h3>
+
+<pre><code class="language-bash"># Install Node.js 22 via nvm (recommended)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+node --version  # should say v22.x.x
+
+# Install OpenClaw
+npm install -g openclaw
+openclaw --version</code></pre>
+
+  <h3 id="wsl-step4">Step 4 &mdash; Run onboarding</h3>
+
+<pre><code class="language-bash">openclaw onboard --install-daemon</code></pre>
+
+  <p>The <code>--install-daemon</code> flag installs the gateway as a systemd user service &mdash; it starts automatically when Ubuntu starts.</p>
+
+  <h3 id="wsl-step5">Step 5 &mdash; Connect Telegram</h3>
+
+<pre><code class="language-bash">openclaw configure
+# Select Telegram -> paste bot token</code></pre>
+
+  <p>Message your bot on Telegram to test.</p>
+
+  <h3 id="wsl-autostart">Make the gateway auto-start with Windows</h3>
+
+  <p>By default WSL2 only runs while you have an Ubuntu terminal open. To keep the gateway running in the background permanently:</p>
+
+  <p><strong>Keep user services alive without a terminal:</strong></p>
+
+<pre><code class="language-bash"># Inside Ubuntu:
+sudo loginctl enable-linger "$(whoami)"</code></pre>
+
+  <p><strong>Auto-start WSL at Windows boot</strong> (PowerShell as Admin):</p>
+
+<pre><code class="language-powershell">schtasks /create /tn "WSL Boot" /tr "wsl.exe -d Ubuntu-24.04 --exec /bin/true" /sc onstart /ru SYSTEM
+# Replace Ubuntu-24.04 with your distro: wsl --list --verbose</code></pre>
+
+  <p>After the next reboot, WSL starts automatically and the gateway is running before you log in.</p>
+
+  <h3 id="wsl-network">Exposing the gateway to your local network</h3>
+
+  <p>WSL2 has its own internal IP that changes on every restart. To reach the gateway from another device:</p>
+
+<pre><code class="language-powershell"># Run in PowerShell as Administrator after each WSL restart:
+$wslIp = (wsl -d Ubuntu-24.04 -- hostname -I).Trim().Split(" ")[0]
+netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=18789 connectaddress=$wslIp connectport=18789
+
+# Allow through Windows Firewall (one-time):
+New-NetFirewallRule -DisplayName "OpenClaw Gateway" -Direction Inbound -Protocol TCP -LocalPort 18789 -Action Allow</code></pre>
+
+  <h3 id="wsl-issues">WSL2 common issues</h3>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Gateway stops when Ubuntu terminal is closed</div>
+    <p>Enable lingering and the systemd service &mdash; see <a href="#wsl-autostart">auto-start guide</a> above.</p>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> <code>openclaw doctor</code> shows &ldquo;systemd not running&rdquo;</div>
+    <p>You skipped Step 2. Run it now, then <code>wsl --shutdown</code> from PowerShell and reopen Ubuntu.</p>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Can&rsquo;t reach gateway from Windows browser (<code>localhost:18789</code>)</div>
+    <p>WSL2 networking changed in recent Windows builds. Try:</p>
+<pre><code class="language-powershell">$wslIp = (wsl -- hostname -I).Trim().Split(" ")[0]
+# Open http://&lt;wslIp&gt;:18789 in your browser</code></pre>
+    <p>Or enable mirrored networking (Windows 11 only) &mdash; add to <code>C:\Users\YourName\.wslconfig</code>:</p>
+<pre><code>[wsl2]
+networkingMode=mirrored</code></pre>
+    <p>Then <code>wsl --shutdown</code> and restart.</p>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> <code>nvm: command not found</code> after install</div>
+<pre><code class="language-bash">source ~/.bashrc
+# or
+source ~/.nvm/nvm.sh</code></pre>
+  </div>
+
+  <hr id="issues">
+
+  <h2>Common Windows Problems (&amp; Fixes)</h2>
+  <p>Compiled from 90+ real GitHub issues and Reddit threads.</p>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Install script closes PowerShell immediately</div>
+    <div class="issue-meta">Cause: PowerShell Execution Policy blocks unsigned scripts.</div>
+<pre><code class="language-powershell">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Then retry the install</code></pre>
+    <p>On <strong>Windows LTSC</strong> (no winget): <code>npm install -g openclaw</code></p>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> &ldquo;Node.js not found&rdquo; or npm errors after install</div>
+    <div class="issue-meta">Cause: npm global bin not in PATH, or wrong Node version (must be 22+).</div>
+<pre><code class="language-powershell">node --version  # must be v22+
+$npmBin = "$(npm config get prefix)\bin"
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$npmBin", "User")
+# Restart PowerShell</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Dashboard returns &ldquo;Not Found&rdquo; / 404</div>
+    <div class="issue-meta">Cause: Control UI files missing after upgrade.</div>
+<pre><code class="language-powershell">openclaw doctor
+# If that doesn't fix it:
+openclaw gateway stop
+npm install -g openclaw@latest
+openclaw gateway start</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Gateway stops when you close PowerShell</div>
+    <div class="issue-meta">Cause: Gateway running in foreground, not as a Windows service.</div>
+<pre><code class="language-powershell">openclaw gateway install
+openclaw gateway status --json</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> &ldquo;Gateway unreachable&rdquo; but it&rsquo;s actually running</div>
+    <div class="issue-meta">Cause: Known probe bug on some Windows setups <a href="https://github.com/openclaw/openclaw/issues/45940">#45940</a>.</div>
+<pre><code class="language-powershell">netstat -an | findstr 18789
+# LISTENING = gateway is fine, ignore the probe error
+Invoke-WebRequest http://localhost:18789/healthz -UseBasicParsing</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Black console windows flashing every 30 seconds</div>
+    <div class="issue-meta">Cause: Background processes missing windowsHide flag &mdash; <a href="https://github.com/openclaw/openclaw/issues/22851">#22851</a>, <a href="https://github.com/openclaw/openclaw/issues/25856">#25856</a>.</div>
+<pre><code class="language-powershell">openclaw gateway install
+openclaw gateway start
+# Close the terminal - runs silently as a Scheduled Task</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> <code>openclaw update</code> fails with EBUSY</div>
+    <div class="issue-meta">Cause: Gateway holds file locks during update.</div>
+<pre><code class="language-powershell">openclaw gateway stop
+npm install -g openclaw@latest
+openclaw gateway start</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Telegram voice messages not transcribed</div>
+    <div class="issue-meta">Cause: Audio transcription needs explicit config on Windows.</div>
+    <p>Add to <code>~/.openclaw/openclaw.json</code>:</p>
+<pre><code class="language-json">{
+  "tools": {
+    "media": { "audio": { "enabled": true } }
+  }
+}</code></pre>
+<pre><code class="language-powershell">openclaw gateway restart</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Gateway fails &mdash; username has spaces or special characters</div>
+    <div class="issue-meta">Cause: Path handling bug <a href="https://github.com/openclaw/openclaw/issues/43943">#43943</a>.</div>
+<pre><code class="language-powershell">npm config set prefix "C:\openclaw"
+npm install -g openclaw
+# Add C:\openclaw\bin to user PATH</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> <code>write</code> tool creates file, <code>edit</code> tool says &ldquo;Could not find exact text&rdquo;</div>
+    <div class="issue-meta">Cause: Windows writes UTF-8 with BOM &mdash; <a href="https://github.com/openclaw/openclaw/issues/45432">#45432</a>.</div>
+<pre><code class="language-powershell">[System.IO.File]::WriteAllText("file.txt", $content, [System.Text.Encoding]::UTF8)</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> OOM crash after updating to v2026.3.12+</div>
+    <div class="issue-meta">Cause: Memory regression <a href="https://github.com/openclaw/openclaw/issues/45962">#45962</a>.</div>
+<pre><code class="language-powershell">npm install -g openclaw@2026.3.11
+openclaw gateway restart</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> exec tool &mdash; PowerShell <code>$</code> variables get mangled</div>
+    <div class="issue-meta">Cause: Dollar-sign interpolation in command strings <a href="https://github.com/openclaw/openclaw/issues/16821">#16821</a>.</div>
+<pre><code class="language-powershell">echo '$HOME'   # correct - single quotes = literal
+echo "$HOME"   # wrong - gets interpolated by PowerShell</code></pre>
+  </div>
+
+  <div class="issue">
+    <div class="issue-title"><div class="dot"></div> Agent tools (exec, web_fetch) disabled after install</div>
+    <div class="issue-meta">Cause: Tool permissions default to restricted in some versions.</div>
+<pre><code class="language-json">{
+  "tools": {
+    "exec": { "enabled": true, "security": "allowlist" },
+    "web_fetch": { "enabled": true }
+  }
+}</code></pre>
+<pre><code class="language-powershell">openclaw gateway restart</code></pre>
+  </div>
+
+  <hr id="commands">
+
+  <h2>Useful Commands</h2>
+
+<pre><code class="language-powershell">openclaw doctor            # run this when anything breaks
+openclaw gateway status    # check gateway health
+openclaw logs --follow     # live logs
+openclaw gateway restart   # restart gateway
+openclaw configure         # change API keys / channels
+openclaw update            # update to latest</code></pre>
+
+  <hr id="help">
+
+  <h2>Where to Get Help</h2>
+  <ul>
+    <li><strong>Download (easiest way):</strong> <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a></li>
+    <li><strong>OpenClaw docs:</strong> <a href="https://docs.openclaw.ai">docs.openclaw.ai</a></li>
+    <li><strong>GitHub Issues:</strong> <a href="https://github.com/openclaw/openclaw/issues">openclaw/openclaw</a></li>
+    <li><strong>This repo:</strong> <a href="https://github.com/keugenek/clawhome">keugenek/clawhome</a> &mdash; PRs and Windows fixes welcome</li>
+  </ul>
+
+</main>
+</div>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// Highlight active sidebar link on scroll
+const headings = document.querySelectorAll('h2[id], h3[id]');
+const links = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+headings.forEach(h => observer.observe(h));
 </script>
 
 </body>
 </html>
+
+
