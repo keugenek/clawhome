@@ -36,13 +36,43 @@ The wizard will ask for your Telegram bot token and AI API key, then you're done
 
 ---
 
-### Option 2 - Manual Install (Advanced)
+### Option 2 - Manual Install on Windows (Advanced)
 
-**For developers who want full control.**
+**For developers who want full control over a native Windows install.**
 
 Requires: Node.js 22+, Git, PowerShell, comfort with the terminal.
 
 See the [step-by-step guide](#manual-install-guide) below.
+
+---
+
+### Option 3 - WSL2 (OpenClaw's Official Recommendation)
+
+**The path OpenClaw's own docs recommend - but with a major trade-off.**
+
+OpenClaw officially recommends installing inside WSL2 (Windows Subsystem for Linux) because the runtime is more stable and Linux tooling works without friction. If you're comfortable with Linux and don't need your AI to actually control your Windows machine, this is the most reliable path.
+
+**But read this first:**
+
+> **WSL2 runs a real Linux VM inside Windows. OpenClaw inside WSL2 cannot directly access your Windows files, apps, clipboard, or desktop.** It lives in a sandboxed Linux environment, not on your Windows machine. When the AI tries to open a file, run a command, or access a folder - it's doing that inside Linux, not Windows.
+
+What this means in practice:
+
+| Feature | Native Windows install | WSL2 install |
+|---|---|---|
+| Access Windows files (`C:\Users\...`) | Yes, directly | Partial - via `/mnt/c/` path, slow |
+| Run Windows apps (Notepad, Explorer...) | Yes | No |
+| Control Windows clipboard | Yes | No |
+| Run PowerShell commands | Yes | No (bash only) |
+| Browser automation on your desktop | Yes | Limited |
+| Home Assistant / local network tools | Yes | Requires port forwarding |
+| Works offline / local AI | Yes | Yes |
+| Gateway reliability | Good (some known bugs) | Excellent |
+| Skill compatibility | Good | Excellent |
+
+**Bottom line:** WSL2 gives you a smoother OpenClaw experience, but it's a Linux AI assistant running in a box - not a Windows AI assistant. If you want your AI to actually help you with Windows tasks, use Option 1 or Option 2.
+
+See the [WSL2 guide](#wsl2-install-guide) below if you still want to go this route.
 
 ---
 
@@ -125,6 +155,205 @@ openclaw status
 ```
 
 `doctor` checks every component and tells you what's broken.
+
+---
+
+## WSL2 Install Guide
+
+> **Remember:** OpenClaw in WSL2 runs inside a Linux VM. It cannot control your Windows desktop, run PowerShell, or access Windows apps. If that's fine for your use case (chat assistant, web tasks, automation that doesn't touch Windows), read on.
+
+### Prerequisites
+
+- Windows 10 version 2004+ or Windows 11
+- Virtualization enabled in BIOS (usually already on)
+- ~5 GB free disk space for WSL2 + Ubuntu
+
+### Step 1 - Install WSL2 and Ubuntu
+
+Open PowerShell **as Administrator**:
+
+```powershell
+wsl --install
+# Or pick Ubuntu explicitly:
+wsl --install -d Ubuntu-24.04
+```
+
+Reboot when prompted.
+
+> If `wsl --install` fails, enable virtualization in BIOS first, then retry.
+
+---
+
+### Step 2 - Enable systemd (required for gateway)
+
+Open your Ubuntu terminal (search "Ubuntu" in Start menu), then run:
+
+```bash
+sudo tee /etc/wsl.conf > /dev/null << 'EOF'
+[boot]
+systemd=true
+EOF
+```
+
+Then from PowerShell, shut down WSL:
+
+```powershell
+wsl --shutdown
+```
+
+Re-open Ubuntu and verify systemd is running:
+
+```bash
+systemctl --user status
+# Should say "active" - if it says "Failed to connect", systemd is not running
+```
+
+---
+
+### Step 3 - Install OpenClaw (inside Ubuntu)
+
+```bash
+# Install Node.js 22 via nvm (recommended)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+node --version  # should say v22.x.x
+
+# Install OpenClaw
+npm install -g openclaw
+openclaw --version
+```
+
+---
+
+### Step 4 - Run onboarding
+
+```bash
+openclaw onboard --install-daemon
+```
+
+The `--install-daemon` flag installs the gateway as a systemd user service - it will start automatically when Ubuntu starts.
+
+The wizard asks for:
+- **AI API key** (Anthropic / OpenAI / etc.)
+- **Telegram bot token** (from [@BotFather](https://t.me/BotFather))
+
+> If onboarding hangs at the health check: `openclaw onboard --skip-health`, then start the gateway manually.
+
+---
+
+### Step 5 - Connect Telegram
+
+```bash
+openclaw configure
+# Select Telegram -> paste bot token
+```
+
+Message your bot on Telegram to test. Done.
+
+---
+
+### Step 6 - Make gateway auto-start with Windows
+
+By default, WSL2 only runs when you have an Ubuntu terminal open. To keep the gateway running in the background:
+
+**Keep WSL alive without a terminal open:**
+
+```bash
+# Inside Ubuntu - enable lingering (gateway survives logout)
+sudo loginctl enable-linger "$(whoami)"
+```
+
+**Auto-start WSL at Windows boot (run in PowerShell as Admin):**
+
+```powershell
+schtasks /create /tn "WSL Boot" /tr "wsl.exe -d Ubuntu-24.04 --exec /bin/true" /sc onstart /ru SYSTEM
+```
+
+Replace `Ubuntu-24.04` with your distro name if different (`wsl --list --verbose` to check).
+
+After the next reboot, WSL will start automatically and the gateway will be running before you even log in.
+
+---
+
+### Step 7 - Verify
+
+```bash
+openclaw doctor
+openclaw gateway status
+systemctl --user status openclaw-gateway
+```
+
+---
+
+### WSL2 - Accessing Windows files from Linux
+
+If you need OpenClaw to read/write Windows files from WSL2, your Windows drives are mounted at `/mnt/`:
+
+```bash
+ls /mnt/c/Users/YourName/Documents
+# Windows: C:\Users\YourName\Documents
+```
+
+> **Performance warning:** File operations across the WSL/Windows boundary (`/mnt/c/...`) are significantly slower than native paths. Keep your workspace inside WSL (`~/`) for speed.
+
+---
+
+### WSL2 - Exposing the gateway to other devices on your network
+
+WSL2 has its own internal IP that changes on every restart. If you want to access the gateway from another device (phone, tablet, other PC):
+
+```powershell
+# Run in PowerShell as Administrator after each WSL restart:
+$wslIp = (wsl -d Ubuntu-24.04 -- hostname -I).Trim().Split(" ")[0]
+netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=18789 connectaddress=$wslIp connectport=18789
+
+# Allow through Windows Firewall (one-time):
+New-NetFirewallRule -DisplayName "OpenClaw Gateway" -Direction Inbound -Protocol TCP -LocalPort 18789 -Action Allow
+```
+
+To automate this at login, save it as a `.ps1` script and add it to Task Scheduler.
+
+---
+
+### WSL2 - Common Issues
+
+**Gateway stops when Ubuntu terminal is closed**
+
+Enable lingering and the systemd service (Step 6 above).
+
+**`openclaw doctor` shows "systemd not running"**
+
+You skipped Step 2. Run it now, then `wsl --shutdown` from PowerShell, reopen Ubuntu.
+
+**Can't reach gateway from Windows browser (`localhost:18789`)**
+
+WSL2 networking changed in recent Windows versions. Try:
+
+```powershell
+# From PowerShell:
+$wslIp = (wsl -- hostname -I).Trim().Split(" ")[0]
+# Then open http://<wslIp>:18789 in your browser
+```
+
+Or enable mirrored networking (Windows 11 only):
+
+```powershell
+# Add to C:\Users\YourName\.wslconfig:
+[wsl2]
+networkingMode=mirrored
+```
+
+Then `wsl --shutdown` and restart.
+
+**`nvm: command not found` after install**
+
+```bash
+source ~/.bashrc
+# or
+source ~/.nvm/nvm.sh
+```
 
 ---
 
