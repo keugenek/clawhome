@@ -434,7 +434,7 @@ openclaw configure
 
 ## Contributing
 
-Got a Windows fix or workaround? PRs welcome. This repo is a living document of what actually works on Windows.
+Got a Windows fix or workaround? PRs / Issues welcome. This repo is a living document of what actually works on Windows.
 
 ## License
 
