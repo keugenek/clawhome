@@ -1,9 +1,9 @@
-﻿CTYPE html>
+﻿TYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Install OpenClaw on Windows &mdash; Complete Guide | ClawHome</title>
+<title>OpenClaw Windows Install Guide (Community)</title>
 <meta name="description" content="How to install OpenClaw on Windows 10 and 11. One-click installer via ChatterPC, manual npm install, WSL2 guide, and fixes for 13+ common Windows issues.">
 <meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide">
 <meta property="og:title" content="Install OpenClaw on Windows &mdash; Complete Guide">
@@ -133,7 +133,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <a href="#install">Install</a>
     <a href="#issues">Troubleshooting</a>
     <a href="https://github.com/keugenek/clawhome">GitHub</a>
-    <a href="https://chatterpc.com/downloads" class="nav-dl">&#x2B07; Download Free</a>
+    <a href="https://chatterpc.com/downloads" class="nav-dl">ChatterPC .msi</a>
   </div>
 </nav>
 
@@ -187,7 +187,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 
   <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is a self-hosted personal AI assistant &mdash; no subscriptions, no cloud, your data stays local. It connects to Telegram, Discord, and WhatsApp and runs 24/7 as a background service on your PC.</p>
 
-  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. And if you just want it working without the friction, <a href="https://chatterpc.com/downloads">ChatterPC</a> is a pre-packaged MSI that handles all of it automatically.</p>
+  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. If you want a pre-packaged installer that skips all the manual steps, <a href="https://chatterpc.com/downloads">ChatterPC</a> is a third-party MSI wrapper for OpenClaw that handles Node.js, PATH, and service setup automatically.</p>
 
   <hr id="install">
 
@@ -209,14 +209,15 @@ tr:hover td{background:rgba(255,255,255,.02)}
   </div>
 
   <div class="callout callout-info">
-    <p><strong>Not sure which to pick?</strong> Use ChatterPC. The manual path is for people who are comfortable in a terminal and want to manage dependencies themselves. Both end up with the same OpenClaw installation.</p>
+    <p><strong>All three options install the same OpenClaw.</strong> Option 1 uses a third-party installer (ChatterPC) that automates the setup. Options 2 and 3 install OpenClaw directly from the official npm package &mdash; no third party involved.</p>
   </div>
 
   <hr id="option-chatterpc">
 
-  <h2>Option 1 &mdash; ChatterPC Installer</h2>
+  <h2>Option 1 &mdash; ChatterPC (Third-Party Installer)</h2>
 
-  <p>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run it, follow the wizard. Handles Node.js, PATH, and Windows service automatically. No terminal needed.</p>
+  <p><strong>What it is:</strong> ChatterPC is a third-party Windows installer that bundles OpenClaw with an automated setup wizard. It is not the official OpenClaw installer &mdash; it is a community tool that simplifies the manual steps below.</p>
+  <p>Download the <code>.msi</code> from <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a>, run it, and follow the wizard. It installs the official OpenClaw npm package, configures Node.js, PATH, and registers a Windows service. No terminal needed.</p>
 <hr id="option-manual">
 
   <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
