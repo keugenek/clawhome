@@ -425,8 +425,7 @@ openclaw configure
 
 ## Where to Get Help
 
-- 💬 **Discord:** [discord.com/invite/clawd](https://discord.com/invite/clawd)
-- 🐛 **GitHub Issues:** [github.com/openclaw/openclaw/issues](https://github.com/openclaw/openclaw/issues)
+- 🐛 **GitHub Issues:** [github.com/keugenek/clawhome/issues](github.com/keugenek/clawhome/issues)
 - 📖 **Docs:** [docs.openclaw.ai](https://docs.openclaw.ai)
 - 📥 **ChatterPC Download:** [chatterpc.com/downloads](https://chatterpc.com/downloads)
 
