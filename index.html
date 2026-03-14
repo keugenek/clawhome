@@ -1,12 +1,11 @@
-﻿
-<html lang="en">
+﻿<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpenClaw on Windows &mdash; Community Installation Guide</title>
+<title>OpenClaw on Windows - Community Installation Guide</title>
 <meta name="description" content="How to install OpenClaw on Windows 10 and 11. One-click installer via ChatterPC, manual npm install, WSL2 guide, and fixes for 13+ common Windows issues.">
 <meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide">
-<meta property="og:title" content="Install OpenClaw on Windows &mdash; Complete Guide">
+<meta property="og:title" content="Install OpenClaw on Windows - Complete Guide">
 <meta property="og:description" content="One-click installer, manual npm guide, WSL2 setup, and fixes for common Windows issues. Free to use, no registration required.">
 <meta property="og:url" content="https://keugenek.github.io/clawhome/">
 <link rel="canonical" href="https://keugenek.github.io/clawhome/">
@@ -143,25 +142,25 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <aside class="sidebar">
   <h4>Install Options</h4>
   <a href="#install">Choose your path</a>
-  <a href="#option-chatterpc">Option 1 &mdash; ChatterPC</a>
-  <a href="#option-manual">Option 2 &mdash; Manual (Windows)</a>
-  <a href="#option-wsl2">Option 3 &mdash; WSL2</a>
+  <a href="#option-chatterpc">Option 1 - ChatterPC</a>
+  <a href="#option-manual">Option 2 - Manual (Windows)</a>
+  <a href="#option-wsl2">Option 3 - WSL2</a>
 
-  <h4>Option 2 &mdash; Manual Guide</h4>
+  <h4>Option 2 - Manual Guide</h4>
   <a href="#prereqs">Prerequisites</a>
-  <a href="#step1">Step 1 &mdash; Install</a>
-  <a href="#step2">Step 2 &mdash; Onboarding</a>
-  <a href="#step3">Step 3 &mdash; Gateway</a>
-  <a href="#step4">Step 4 &mdash; Telegram</a>
-  <a href="#step5">Step 5 &mdash; Verify</a>
+  <a href="#step1">Step 1 - Install</a>
+  <a href="#step2">Step 2 - Onboarding</a>
+  <a href="#step3">Step 3 - Gateway</a>
+  <a href="#step4">Step 4 - Telegram</a>
+  <a href="#step5">Step 5 - Verify</a>
 
-  <h4>Option 3 &mdash; WSL2 Guide</h4>
+  <h4>Option 3 - WSL2 Guide</h4>
   <a href="#wsl-prereqs">WSL2 Prerequisites</a>
-  <a href="#wsl-step1">Step 1 &mdash; Install WSL2</a>
-  <a href="#wsl-step2">Step 2 &mdash; Enable systemd</a>
-  <a href="#wsl-step3">Step 3 &mdash; Install OpenClaw</a>
-  <a href="#wsl-step4">Step 4 &mdash; Onboarding</a>
-  <a href="#wsl-step5">Step 5 &mdash; Telegram</a>
+  <a href="#wsl-step1">Step 1 - Install WSL2</a>
+  <a href="#wsl-step2">Step 2 - Enable systemd</a>
+  <a href="#wsl-step3">Step 3 - Install OpenClaw</a>
+  <a href="#wsl-step4">Step 4 - Onboarding</a>
+  <a href="#wsl-step5">Step 5 - Telegram</a>
   <a href="#wsl-autostart">Auto-start with Windows</a>
   <a href="#wsl-network">Network &amp; LAN access</a>
   <a href="#wsl-issues">WSL2 issues</a>
@@ -185,9 +184,9 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <img src="https://img.shields.io/badge/download-chatterpc.com-brightgreen" alt="Download">
   </div>
 
-  <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is an open-source AI assistant that runs on your own machine. It connects to Telegram, Discord, and WhatsApp, and runs as a background service on your PC. You bring your own API key (Anthropic, OpenAI, etc.) &mdash; there is no OpenClaw subscription or account.</p>
+  <p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> is an open-source AI assistant that runs on your own machine. It connects to Telegram, Discord, and WhatsApp, and runs as a background service on your PC. You bring your own API key (Anthropic, OpenAI, etc.) - there is no OpenClaw subscription or account.</p>
 
-  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. Most Windows users install via <a href="https://chatterpc.com/downloads">ChatterPC</a> &mdash; a free Windows app that sets up OpenClaw automatically, with a simple wizard. No terminal, no configuration. If that&rsquo;s you, <a href="https://chatterpc.com/downloads">start here</a>.</p>
+  <p>The standard npm install on Windows is notoriously rough: wrong Node version silently breaks things, PATH doesn&rsquo;t update, the gateway closes when you shut the terminal, and the official docs are Linux-first. This community guide exists to fix that. Most Windows users install via <a href="https://chatterpc.com/downloads">ChatterPC</a> - a free Windows app that sets up OpenClaw automatically, with a simple wizard. No terminal, no configuration. If that&rsquo;s you, <a href="https://chatterpc.com/downloads">start here</a>.</p>
 
   <hr id="install">
 
@@ -197,7 +196,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <div class="option-card" style="border-color:rgba(249,115,22,.4)">
       <span class="option-badge badge-green">&#x2713; Recommended</span>
       <h3>ChatterPC</h3>
-      <p>The easiest way to get OpenClaw running. A free Windows app with a setup wizard &mdash; no terminal, no technical knowledge needed.</p>
+      <p>The easiest way to get OpenClaw running. A free Windows app with a setup wizard - no terminal, no technical knowledge needed.</p>
       <a href="https://chatterpc.com/downloads" class="btn btn-primary">&#x2B07; Download ChatterPC (Free)</a>
     </div>
     <div class="option-card">
@@ -214,24 +213,24 @@ tr:hover td{background:rgba(255,255,255,.02)}
 
   <hr id="option-manual">
 
-  <h2>Option 2 &mdash; Manual Install Guide (Native Windows)</h2>
+  <h2>Option 2 - Manual Install Guide (Native Windows)</h2>
   <div class="callout callout-warn">
-    <p><strong>Heads up:</strong> The native Windows install has rough edges &mdash; Node.js version conflicts, PATH issues, and the gateway stopping when you close the terminal. If you hit problems, <a href="#option-wsl2">WSL2 (Option 3)</a> is more stable. All known issues are documented in the <a href="#issues">troubleshooting section</a>.</p>
+    <p><strong>Heads up:</strong> The native Windows install has rough edges - Node.js version conflicts, PATH issues, and the gateway stopping when you close the terminal. If you hit problems, <a href="#option-wsl2">WSL2 (Option 3)</a> is more stable. All known issues are documented in the <a href="#issues">troubleshooting section</a>.</p>
   </div>
 
-  <p>When it works, native Windows is the most powerful setup &mdash; your AI can control apps, run PowerShell, access files, and interact with your desktop. WSL2 can't do any of that.</p>
+  <p>When it works, native Windows is the most powerful setup - your AI can control apps, run PowerShell, access files, and interact with your desktop. WSL2 can't do any of that.</p>
 
   <details style="margin-bottom:1.5rem">
     <summary style="cursor:pointer;color:var(--blue);font-size:.9rem;padding:.5rem 0">Why native Windows beats WSL2 (expand)</summary>
     <div style="padding:1rem 0 0">
-      <p>WSL2 runs OpenClaw inside a Linux VM &mdash; sandboxed, can't touch Windows. Native means your AI is actually <em>on</em> your machine:</p>
+      <p>WSL2 runs OpenClaw inside a Linux VM - sandboxed, can't touch Windows. Native means your AI is actually <em>on</em> your machine:</p>
       <ul>
-        <li><strong>Control Windows apps</strong> &mdash; open Excel, browser, any app; click buttons, fill forms</li>
-        <li><strong>Full file access at full speed</strong> &mdash; read/write <code>C:\Users\You\Documents</code> instantly</li>
-        <li><strong>Run PowerShell</strong> &mdash; automate settings, registry, services</li>
-        <li><strong>Clipboard</strong> &mdash; read what you copied, paste into any app</li>
-        <li><strong>Screen &amp; UI automation</strong> &mdash; take screenshots, click things on screen</li>
-        <li><strong>Local network without port forwarding</strong> &mdash; NAS, printer, Home Assistant</li>
+        <li><strong>Control Windows apps</strong> - open Excel, browser, any app; click buttons, fill forms</li>
+        <li><strong>Full file access at full speed</strong> - read/write <code>C:\Users\You\Documents</code> instantly</li>
+        <li><strong>Run PowerShell</strong> - automate settings, registry, services</li>
+        <li><strong>Clipboard</strong> - read what you copied, paste into any app</li>
+        <li><strong>Screen &amp; UI automation</strong> - take screenshots, click things on screen</li>
+        <li><strong>Local network without port forwarding</strong> - NAS, printer, Home Assistant</li>
       </ul>
     </div>
   </details>
@@ -240,11 +239,11 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <summary style="cursor:pointer;color:var(--blue);font-size:.9rem;padding:.5rem 0">&#x26A0;&#xFE0F; Known friction points (expand)</summary>
     <div style="padding:1rem 0 0">
       <ul>
-        <li><strong>Node.js must be v22+</strong> &mdash; older versions silently fail</li>
-        <li><strong>PATH doesn't update automatically</strong> &mdash; restart the terminal after installing</li>
-        <li><strong>Gateway closes with the terminal</strong> &mdash; must install as a Windows service</li>
-        <li><strong>PowerShell execution policy</strong> &mdash; one-time fix required</li>
-        <li><strong>Usernames with spaces or special characters</strong> &mdash; can break the gateway</li>
+        <li><strong>Node.js must be v22+</strong> - older versions silently fail</li>
+        <li><strong>PATH doesn't update automatically</strong> - restart the terminal after installing</li>
+        <li><strong>Gateway closes with the terminal</strong> - must install as a Windows service</li>
+        <li><strong>PowerShell execution policy</strong> - one-time fix required</li>
+        <li><strong>Usernames with spaces or special characters</strong> - can break the gateway</li>
       </ul>
       <p style="margin-top:.75rem">All fixes are in the <a href="#issues">troubleshooting section</a>. Or use <a href="https://chatterpc.com/downloads">ChatterPC (Option 1)</a> to skip all of this.</p>
     </div>
@@ -265,7 +264,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <p><strong>Node.js version matters.</strong> Node 18 and 20 cause silent failures. Install Node 22 from <a href="https://nodejs.org">nodejs.org</a> or run: <code>winget install OpenJS.NodeJS.LTS</code></p>
   </div>
 
-  <h3 id="step1">Step 1 &mdash; Install</h3>
+  <h3 id="step1">Step 1 - Install</h3>
   <div class="step-header"><div class="step-num">1</div><strong>Open PowerShell as Administrator</strong></div>
 
 <pre><code class="language-powershell"># Allow scripts to run (if not already set)
@@ -277,7 +276,7 @@ npm install -g openclaw
 # Verify
 openclaw --version</code></pre>
 
-  <h3 id="step2">Step 2 &mdash; Run onboarding</h3>
+  <h3 id="step2">Step 2 - Run onboarding</h3>
   <div class="step-header"><div class="step-num">2</div><strong>Run the setup wizard</strong></div>
 
 <pre><code class="language-powershell">openclaw onboard</code></pre>
@@ -285,15 +284,15 @@ openclaw --version</code></pre>
   <p>The wizard asks for:</p>
   <ul>
     <li><strong>AI model API key</strong> (Anthropic Claude / OpenAI / etc.)</li>
-    <li><strong>Telegram bot token</strong> (from <a href="https://t.me/BotFather">@BotFather</a> &mdash; takes 30 seconds)</li>
-    <li><strong>Gateway service install</strong> &mdash; say yes, this makes OpenClaw start with Windows</li>
+    <li><strong>Telegram bot token</strong> (from <a href="https://t.me/BotFather">@BotFather</a> - takes 30 seconds)</li>
+    <li><strong>Gateway service install</strong> - say yes, this makes OpenClaw start with Windows</li>
   </ul>
 
   <div class="callout callout-tip">
     <p>If onboarding hangs at the gateway health check: <code>openclaw onboard --skip-health</code>, then start the gateway manually after.</p>
   </div>
 
-  <h3 id="step3">Step 3 &mdash; Start the gateway</h3>
+  <h3 id="step3">Step 3 - Start the gateway</h3>
   <div class="step-header"><div class="step-num">3</div><strong>Install as a Windows service</strong></div>
 
 <pre><code class="language-powershell"># Install as a Windows Scheduled Task (runs on startup)
@@ -302,7 +301,7 @@ openclaw gateway install
 # Check it's running
 openclaw gateway status</code></pre>
 
-  <h3 id="step4">Step 4 &mdash; Connect Telegram</h3>
+  <h3 id="step4">Step 4 - Connect Telegram</h3>
   <div class="step-header"><div class="step-num">4</div><strong>Link your bot</strong></div>
   <ol>
     <li>Open <a href="https://t.me/BotFather">@BotFather</a> on Telegram</li>
@@ -312,7 +311,7 @@ openclaw gateway status</code></pre>
 
   <p>Message your bot on Telegram. You should get a response. &#x2705;</p>
 
-  <h3 id="step5">Step 5 &mdash; Verify</h3>
+  <h3 id="step5">Step 5 - Verify</h3>
   <div class="step-header"><div class="step-num">5</div><strong>Run the health check</strong></div>
 
 <pre><code class="language-powershell">openclaw doctor
@@ -322,14 +321,14 @@ openclaw status</code></pre>
 
   <hr id="option-wsl2">
 
-  <h2>Option 3 &mdash; WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
+  <h2>Option 3 - WSL2 (OpenClaw&rsquo;s Official Recommendation)</h2>
 
-  <p><strong>WSL2 (Windows Subsystem for Linux 2)</strong> is a feature built into Windows 10/11 that runs a full Linux system silently inside your PC &mdash; its own terminal, files, and apps, completely separate from Windows. You won&rsquo;t see it on screen; it just runs in the background.</p>
+  <p><strong>WSL2 (Windows Subsystem for Linux 2)</strong> is a feature built into Windows 10/11 that runs a full Linux system silently inside your PC - its own terminal, files, and apps, completely separate from Windows. You won&rsquo;t see it on screen; it just runs in the background.</p>
 
   <p>OpenClaw&rsquo;s official docs recommend this path because the Linux runtime is more reliable for Node.js tooling. The trade-off: OpenClaw ends up inside that Linux sandbox, not on your Windows machine. See the comparison table below. If you hit issues, jump to <a href="#wsl-issues">WSL2 common issues</a>.</p>
 
   <div class="callout callout-warn">
-    <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux &mdash; not on your actual Windows machine.</p>
+    <p><strong>WSL2 runs a real Linux VM inside Windows.</strong> OpenClaw inside WSL2 cannot directly access your Windows files, run Windows apps, control your clipboard, or execute PowerShell. It lives in a sandboxed Linux environment. When your AI tries to open a file or run a command, it does that inside Linux - not on your actual Windows machine.</p>
   </div>
 
   <table>
@@ -348,7 +347,7 @@ openclaw status</code></pre>
     </tbody>
   </table>
 
-  <p><strong>Bottom line:</strong> WSL2 gives you a more stable OpenClaw experience, but it&rsquo;s a Linux AI assistant running in a sandbox &mdash; not a Windows AI. If you want your AI to help with Windows tasks (run scripts, manage files, automate apps), use Option 1 or 2. If you just want a chat/web/code assistant that&rsquo;s rock-solid, WSL2 is fine.</p>
+  <p><strong>Bottom line:</strong> WSL2 gives you a more stable OpenClaw experience, but it&rsquo;s a Linux AI assistant running in a sandbox - not a Windows AI. If you want your AI to help with Windows tasks (run scripts, manage files, automate apps), use Option 1 or 2. If you just want a chat/web/code assistant that&rsquo;s rock-solid, WSL2 is fine.</p>
 
   <p>Full WSL2 setup guide: <a href="#wsl-prereqs">skip to WSL2 guide &darr;</a></p>
 
@@ -362,7 +361,7 @@ openclaw status</code></pre>
 
   <p><strong>Requirements:</strong> Windows 10 v2004+ or Windows 11, virtualization enabled in BIOS, ~5 GB free disk space.</p>
 
-  <h3 id="wsl-step1">Step 1 &mdash; Install WSL2 and Ubuntu</h3>
+  <h3 id="wsl-step1">Step 1 - Install WSL2 and Ubuntu</h3>
 
 <pre><code class="language-powershell"># Open PowerShell as Administrator:
 wsl --install
@@ -372,7 +371,7 @@ wsl --install -d Ubuntu-24.04</code></pre>
 
   <p>Reboot when prompted. If <code>wsl --install</code> fails, enable virtualization in BIOS first.</p>
 
-  <h3 id="wsl-step2">Step 2 &mdash; Enable systemd (required for gateway)</h3>
+  <h3 id="wsl-step2">Step 2 - Enable systemd (required for gateway)</h3>
 
   <p>Open your Ubuntu terminal (search &ldquo;Ubuntu&rdquo; in Start menu):</p>
 
@@ -390,7 +389,7 @@ EOF</code></pre>
 <pre><code class="language-bash">systemctl --user status
 # Should say "active" -- if "Failed to connect", systemd is not running</code></pre>
 
-  <h3 id="wsl-step3">Step 3 &mdash; Install OpenClaw</h3>
+  <h3 id="wsl-step3">Step 3 - Install OpenClaw</h3>
 
 <pre><code class="language-bash"># Install Node.js 22 via nvm (recommended)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -403,13 +402,13 @@ node --version  # should say v22.x.x
 npm install -g openclaw
 openclaw --version</code></pre>
 
-  <h3 id="wsl-step4">Step 4 &mdash; Run onboarding</h3>
+  <h3 id="wsl-step4">Step 4 - Run onboarding</h3>
 
 <pre><code class="language-bash">openclaw onboard --install-daemon</code></pre>
 
-  <p>The <code>--install-daemon</code> flag installs the gateway as a systemd user service &mdash; it starts automatically when Ubuntu starts.</p>
+  <p>The <code>--install-daemon</code> flag installs the gateway as a systemd user service - it starts automatically when Ubuntu starts.</p>
 
-  <h3 id="wsl-step5">Step 5 &mdash; Connect Telegram</h3>
+  <h3 id="wsl-step5">Step 5 - Connect Telegram</h3>
 
 <pre><code class="language-bash">openclaw configure
 # Select Telegram -> paste bot token</code></pre>
@@ -447,7 +446,7 @@ New-NetFirewallRule -DisplayName "OpenClaw Gateway" -Direction Inbound -Protocol
 
   <div class="issue">
     <div class="issue-title"><div class="dot"></div> Gateway stops when Ubuntu terminal is closed</div>
-    <p>Enable lingering and the systemd service &mdash; see <a href="#wsl-autostart">auto-start guide</a> above.</p>
+    <p>Enable lingering and the systemd service - see <a href="#wsl-autostart">auto-start guide</a> above.</p>
   </div>
 
   <div class="issue">
@@ -460,7 +459,7 @@ New-NetFirewallRule -DisplayName "OpenClaw Gateway" -Direction Inbound -Protocol
     <p>WSL2 networking changed in recent Windows builds. Try:</p>
 <pre><code class="language-powershell">$wslIp = (wsl -- hostname -I).Trim().Split(" ")[0]
 # Open http://&lt;wslIp&gt;:18789 in your browser</code></pre>
-    <p>Or enable mirrored networking (Windows 11 only) &mdash; add to <code>C:\Users\YourName\.wslconfig</code>:</p>
+    <p>Or enable mirrored networking (Windows 11 only) - add to <code>C:\Users\YourName\.wslconfig</code>:</p>
 <pre><code>[wsl2]
 networkingMode=mirrored</code></pre>
     <p>Then <code>wsl --shutdown</code> and restart.</p>
@@ -522,7 +521,7 @@ Invoke-WebRequest http://localhost:18789/healthz -UseBasicParsing</code></pre>
 
   <div class="issue">
     <div class="issue-title"><div class="dot"></div> Black console windows flashing every 30 seconds</div>
-    <div class="issue-meta">Cause: Background processes missing windowsHide flag &mdash; <a href="https://github.com/openclaw/openclaw/issues/22851">#22851</a>, <a href="https://github.com/openclaw/openclaw/issues/25856">#25856</a>.</div>
+    <div class="issue-meta">Cause: Background processes missing windowsHide flag - <a href="https://github.com/openclaw/openclaw/issues/22851">#22851</a>, <a href="https://github.com/openclaw/openclaw/issues/25856">#25856</a>.</div>
 <pre><code class="language-powershell">openclaw gateway install
 openclaw gateway start
 # Close the terminal - runs silently as a Scheduled Task</code></pre>
@@ -549,7 +548,7 @@ openclaw gateway start</code></pre>
   </div>
 
   <div class="issue">
-    <div class="issue-title"><div class="dot"></div> Gateway fails &mdash; username has spaces or special characters</div>
+    <div class="issue-title"><div class="dot"></div> Gateway fails - username has spaces or special characters</div>
     <div class="issue-meta">Cause: Path handling bug <a href="https://github.com/openclaw/openclaw/issues/43943">#43943</a>.</div>
 <pre><code class="language-powershell">npm config set prefix "C:\openclaw"
 npm install -g openclaw
@@ -558,7 +557,7 @@ npm install -g openclaw
 
   <div class="issue">
     <div class="issue-title"><div class="dot"></div> <code>write</code> tool creates file, <code>edit</code> tool says &ldquo;Could not find exact text&rdquo;</div>
-    <div class="issue-meta">Cause: Windows writes UTF-8 with BOM &mdash; <a href="https://github.com/openclaw/openclaw/issues/45432">#45432</a>.</div>
+    <div class="issue-meta">Cause: Windows writes UTF-8 with BOM - <a href="https://github.com/openclaw/openclaw/issues/45432">#45432</a>.</div>
 <pre><code class="language-powershell">[System.IO.File]::WriteAllText("file.txt", $content, [System.Text.Encoding]::UTF8)</code></pre>
   </div>
 
@@ -570,7 +569,7 @@ openclaw gateway restart</code></pre>
   </div>
 
   <div class="issue">
-    <div class="issue-title"><div class="dot"></div> exec tool &mdash; PowerShell <code>$</code> variables get mangled</div>
+    <div class="issue-title"><div class="dot"></div> exec tool - PowerShell <code>$</code> variables get mangled</div>
     <div class="issue-meta">Cause: Dollar-sign interpolation in command strings <a href="https://github.com/openclaw/openclaw/issues/16821">#16821</a>.</div>
 <pre><code class="language-powershell">echo '$HOME'   # correct - single quotes = literal
 echo "$HOME"   # wrong - gets interpolated by PowerShell</code></pre>
@@ -606,7 +605,7 @@ openclaw update            # update to latest</code></pre>
     <li><strong>Download (easiest way):</strong> <a href="https://chatterpc.com/downloads">chatterpc.com/downloads</a></li>
     <li><strong>OpenClaw docs:</strong> <a href="https://docs.openclaw.ai">docs.openclaw.ai</a></li>
     <li><strong>GitHub Issues:</strong> <a href="https://github.com/openclaw/openclaw/issues">openclaw/openclaw</a></li>
-    <li><strong>This repo:</strong> <a href="https://github.com/keugenek/clawhome">keugenek/clawhome</a> &mdash; PRs and Windows fixes welcome</li>
+    <li><strong>This repo:</strong> <a href="https://github.com/keugenek/clawhome">keugenek/clawhome</a> - PRs and Windows fixes welcome</li>
   </ul>
 
 </main>
