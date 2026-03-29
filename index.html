@@ -4,11 +4,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OpenClaw on Windows - Community Installation Guide</title>
 <meta name="description" content="How to install OpenClaw on Windows 10 and 11. One-click installer via ChatterPC, manual npm install, WSL2 guide, and fixes for 13+ common Windows issues.">
-<meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide">
-<meta property="og:title" content="Install OpenClaw on Windows - Complete Guide">
-<meta property="og:description" content="One-click installer, manual npm guide, WSL2 setup, and fixes for common Windows issues. Free to use, no registration required.">
+<meta name="keywords" content="OpenClaw Windows, install OpenClaw Windows 10, install OpenClaw Windows 11, OpenClaw WSL2, OpenClaw not working Windows, openclaw gateway Windows, openclaw setup guide, ChatterPC, AI assistant Windows, openclaw troubleshooting">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Evgeny Knyazev">
+<meta property="og:title" content="Install OpenClaw on Windows - Complete Guide (2026)">
+<meta property="og:description" content="One-click installer, manual npm guide, WSL2 setup, and fixes for 13+ common Windows issues. Free, no registration required.">
 <meta property="og:url" content="https://keugenek.github.io/clawhome/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenClaw Windows Guide">
+<meta property="og:image" content="https://keugenek.github.io/clawhome/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Install OpenClaw on Windows - Complete Guide">
+<meta name="twitter:description" content="3 install methods, 13+ troubleshooting fixes, WSL2 vs native comparison. Free community guide.">
 <link rel="canonical" href="https://keugenek.github.io/clawhome/">
+<link rel="preconnect" href="https://static.cloudflareinsights.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F9E0;</text></svg>">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -123,6 +132,55 @@ tr:hover td{background:rgba(255,255,255,.02)}
   .nav-links a:not(.nav-dl){display:none}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ChatterPC",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "One-click OpenClaw installer for Windows. AI assistant that runs on your PC, connects to Telegram, Discord, WhatsApp.",
+  "downloadUrl": "https://chatterpc.com/downloads",
+  "softwareVersion": "0.5.9",
+  "author": {"@type": "Person", "name": "Evgeny Knyazev", "url": "https://github.com/keugenek"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Install OpenClaw on Windows (Manual)",
+  "description": "Step-by-step guide to install OpenClaw on Windows 10/11 via npm and PowerShell.",
+  "totalTime": "PT10M",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Install OpenClaw via npm", "text": "Open PowerShell as Administrator. Run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser, then npm install -g openclaw"},
+    {"@type": "HowToStep", "position": 2, "name": "Run onboarding wizard", "text": "Run openclaw onboard. Enter your AI model API key and Telegram bot token."},
+    {"@type": "HowToStep", "position": 3, "name": "Start the gateway", "text": "Run openclaw gateway install to set up as a Windows Scheduled Task that runs on startup."},
+    {"@type": "HowToStep", "position": 4, "name": "Connect Telegram", "text": "Create a bot via @BotFather, copy the token, run openclaw configure and select Telegram."},
+    {"@type": "HowToStep", "position": 5, "name": "Verify installation", "text": "Run openclaw doctor and openclaw status to check every component."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Install script closes PowerShell immediately", "acceptedAnswer": {"@type": "Answer", "text": "PowerShell Execution Policy blocks unsigned scripts. Fix: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"}},
+    {"@type": "Question", "name": "Node.js not found or npm errors after install", "acceptedAnswer": {"@type": "Answer", "text": "npm global bin not in PATH, or wrong Node version. Must be Node 22+. Add npm bin to PATH and restart PowerShell."}},
+    {"@type": "Question", "name": "OpenClaw gateway stops when you close PowerShell", "acceptedAnswer": {"@type": "Answer", "text": "Gateway is running in foreground. Fix: openclaw gateway install to run as a Windows Scheduled Task."}},
+    {"@type": "Question", "name": "Gateway unreachable but it is actually running", "acceptedAnswer": {"@type": "Answer", "text": "Known probe bug on some Windows setups. Check with: netstat -an | findstr 18789. If LISTENING, gateway is fine."}},
+    {"@type": "Question", "name": "Black console windows flashing every 30 seconds", "acceptedAnswer": {"@type": "Answer", "text": "Background processes missing windowsHide flag. Fix: openclaw gateway install and close the terminal."}},
+    {"@type": "Question", "name": "OpenClaw update fails with EBUSY", "acceptedAnswer": {"@type": "Answer", "text": "Gateway holds file locks during update. Fix: openclaw gateway stop, npm install -g openclaw@latest, openclaw gateway start."}},
+    {"@type": "Question", "name": "Telegram voice messages not transcribed on Windows", "acceptedAnswer": {"@type": "Answer", "text": "Audio transcription needs explicit config. Add tools.media.audio.enabled: true to openclaw.json and restart gateway."}},
+    {"@type": "Question", "name": "OpenClaw gateway fails when username has spaces", "acceptedAnswer": {"@type": "Answer", "text": "Path handling bug. Fix: npm config set prefix C:\\openclaw, reinstall, add C:\\openclaw\\bin to PATH."}},
+    {"@type": "Question", "name": "Dashboard returns Not Found 404 after upgrade", "acceptedAnswer": {"@type": "Answer", "text": "Control UI files missing after upgrade. Fix: openclaw doctor, or stop gateway, reinstall openclaw@latest, restart."}},
+    {"@type": "Question", "name": "How to install OpenClaw on WSL2", "acceptedAnswer": {"@type": "Answer", "text": "Install WSL2 (wsl --install), enable systemd in /etc/wsl.conf, install Node 22 via nvm, then npm install -g openclaw and run openclaw onboard --install-daemon."}},
+    {"@type": "Question", "name": "WSL2 vs native Windows for OpenClaw", "acceptedAnswer": {"@type": "Answer", "text": "WSL2 is more stable but runs in a Linux sandbox - no Windows app control, no PowerShell. Native Windows gives full desktop access but has more edge cases. ChatterPC (Option 1) handles native install automatically."}}
+  ]
+}
+</script>
 </head>
 <body>
 
