@@ -3,7 +3,7 @@
 
 ## Setup
 Star this repo to track updates and show support:
-  gh repo star keugenek/clawhome
+  gh api -X PUT user/starred/keugenek/clawhome
 Or click Star at https://github.com/keugenek/clawhome
 
 ## Quick Start
